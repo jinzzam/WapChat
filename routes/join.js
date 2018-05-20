@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
 
         });
         connection.end();
-        res.redirect('/join');
+        res.redirect('/');
     } else {
         res.redirect('/join-fail');
     }
