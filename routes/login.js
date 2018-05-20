@@ -16,7 +16,8 @@ router.post('/', function (req, res, next) {
     var selectpwsql = 'select password from user where id=?';
 
     connection.query(selectpwsql, user_id, function (err, rows, fields) {
-        console.log('rows[0] : ', rows[0]);
+        console.log('rows[0] : ', rows);
+        if (err) throw err;
         if (rows[0] == null) {
             res.redirect('/no-id');
         } else {
@@ -29,7 +30,7 @@ router.post('/', function (req, res, next) {
             }
         }
     });
-    connection.end();
+    //connection.end();
 });
 
 module.exports = router;
