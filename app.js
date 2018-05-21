@@ -64,8 +64,12 @@ io.sockets.on('connection', function (socket) {
         console.log('room' + data.roomId);
         socket.join('room' + data.roomId);
     });
-    socket.on('chatReq', function (data) {
+    socket.on('chatReqG', function (data) {
         console.log(data);
         io.sockets.in('room1').emit('chatRes', data.msg);
+    });
+    socket.on('chatReqC', function (data) {
+        console.log(data);
+        io.sockets.in('room2').emit('chatRes', data.msg);
     });
 });

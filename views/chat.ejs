@@ -11,7 +11,7 @@
 <form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
     <label>Type what you want to say: </label>
-    <input type="text" , id="mytext" , placeholder="type anything">
+    <input type="text" id="mytext" placeholder="type anything">
     <input type="button" value="chat" onclick="clk()">
 </form>
 
@@ -23,7 +23,7 @@
 
     function clk() {
         var message = $('#mytext').val();
-        socket.emit('chatReq', {msg: message});
+        socket.emit('chatReqG', {msg: message});
     }
 
     socket.on('chatRes', function (data) {

@@ -23,7 +23,7 @@
 
     function clk() {
         var message = $('#mytext').val();
-        socket.emit('chatReq', {msg: message});
+        socket.emit('chatReqC', {msg: message});
     }
 
     socket.on('chatRes', function (data) {
