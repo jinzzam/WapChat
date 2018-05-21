@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 < lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,6 +8,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
 </head>
 <body>
+<h1>WAP General chat</h1>
+<form>
+    <textarea id="chat-body" readonly rows="20px"></textarea><br>
+    <label>Type what you want to say: </label>
+    <input type="text" , id="mytext" , placeholder="type anything">
+    <input type="button" value="chat" onclick="clk()">
+</form>
+
+</body>
 <script>
     var socket = io.connect("http://localhost:4000");
     var roomId = 1;
@@ -45,3 +55,17 @@
 
 </body>
     </html>
+=======
+
+    function clk() {
+        var message = $('#mytext').val();
+        socket.emit('chatReq', {msg: message});
+    }
+
+    socket.on('chatRes', function (data) {
+        console.log(data);
+        $('#chat-body').html($('#chat-body').html() + data + '\n');
+    })
+</script>
+</html>
+>>>>>>> 6a570e3d2642bd8a33fbe797f074b11f477443f0
