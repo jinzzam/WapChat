@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+</head>
+<body>
+<script>
+    var socket = io.connect("http://localhost:4000");
+    var roomId = 1;
+    socket.emit('join:room', {roomId: roomId});
+    function clk(){
+        var message = $('#mytext').val();
+        socket.emit('chatReq', {msg:message});
+    }
+    socket.on('chatRes',function (data) {
+        console.log(data);
+        $('#kuma').html($('#kuma').html()+data+'\n');
+    })
+</script>
+<form>
+    <textarea id="kuma"></textarea>
+    <input type="text" id="mytext" placeholder="아이디를 입력하여 주십시오.">
+    <input type="button" onclick="clk()">
+</form>
+<script type="text/javascript">
+    var id=prompt('아무거나 입력하십시오.');
+    if(id=='wkdusfhrm'){            //아이디는 임시로 한글로 자연로그를 치면 됨
+        var pw=prompt('비밀번호를 입력하십오.');
+        if(pw=1111111){              //임시 비밀번호로 1을 7번 입력
+            alert('로그인 하셨습니다. '+id+'님, 환영합니다.');
+        }else{
+            alert('비밀번호가 다릅니다.');
+        }
+    }else{
+        alert('아이디가 일치하지 않습니다.');
+    }
+</script>
+
+
+
+
+
+</body>
+    </html>
