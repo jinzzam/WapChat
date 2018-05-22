@@ -83,5 +83,23 @@
         }
     }
 
+    socket.on('MoreData', function (data) {
+        UpdateBar(data.Percent);
+        var Place = data.Place * 524288;
+        var NewFile = "";
+
+        if (selectedFile.webkitSlice)
+            NewFile = selectedFile.webkitSlice(Place, Place + Math.min(524288, (selectedFile.size - Place)));
+        else {
+            NewFile = selectedFile.slice(Place, Place + Math.min(524288, (SelectedFile.size - Place)));
+            fileReader.readAsBinaryString(NewFile);
+        }
+    });
+
+    function UpdateBar(percent) {
+        $('#percent').innerHTML = (Math.round(percent * 100) / 100) + '%';
+        var MBDone = Math.round(((percent / 100.0) * selectedFile.size) / 1048576);
+        $('#MB').innerHTML = MBDone;
+    }
 </script>
 </html>
