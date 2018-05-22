@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -71,5 +72,34 @@ io.sockets.on('connection', function (socket) {
     socket.on('chatReqC', function (data) {
         console.log(data);
         io.sockets.in('room2').emit('chatRes', data.msg);
+    });
+
+    socket.on('Start', function (data) {
+        console.log('socket Start!');
+        console.log(data);
+
+        var Name = data.Name;
+
+        Files[Name] = {
+            FileSize: data.Size,
+            Data: "",
+            Downloaded: 0
+        };
+
+        var place = 0;
+
+        var Stat = fs.statSync('/Temp' + Name);
+        if (Stat.isFile) {
+            Files[Name].Downloaded = Stat.size;
+            place = Stat.size / 524288;
+        }
+
+        fs.open("Temp/" + Name, "a+", function (err, fd) {
+            if (err) console.log(err);
+            else {
+                File[Name].Handler = fd;
+                socket.emit('MoreData', {Place: place, Percent: 0});
+            }
+        })
     });
 });
