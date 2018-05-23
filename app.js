@@ -79,7 +79,6 @@ io.sockets.on('connection', function (socket) {
         console.log(data);
 
         var Name = data.Name;
-
         Files[Name] = {
             FileSize: data.Size,
             Data: "",
@@ -101,5 +100,50 @@ io.sockets.on('connection', function (socket) {
                 socket.emit('MoreData', {Place: place, Percent: 0});
             }
         })
+    });
+    socket.on('Upload', function (data) {
+        var Name = data.Name;
+        Files[Name].Downloaded += data.Data.length;
+        Files[Name].Data += data.Data;
+        if (Files[Name].Downloaded == Files[Name].FileSize) {
+            fs.write(Files[Name].Handler, Files[Name].Data, null, 'Binary', function (err, written) {
+                if (err) console.log(err);
+                //Generate movie thumnail
+                var readable = fs.createReadStream("Temp/" + Name);
+                var writable = fs.createWriteStream("Video/" + Name);
+
+                readable.pipe(writable);
+
+                writable.on('finish', function (err) {
+                    if (err) console.log(err);
+
+                    console.log(Name + ": writing is completed.");
+
+                    fs.close(Files[Name].Handler, function (err) {
+                        //close fs module
+                        if (err) console.error(err);
+
+                        fs.unlink("Temp/" + Name, function (err) {
+                            //Moving file is Completed
+                            if (err) console.error(err);
+
+                            console.log(Name + "is deleted");
+                        });
+                    });
+                });
+
+            });
+        } else if (Files[Name].Data.length > 10485760) {
+            fs.write(Files[Name].Handler, Files[Name].Data, null, 'Binary', function (err, writtem) {
+                Files[Name].Data = ""; //Reset the Buffer
+                var Place = Files[Name].Downloaded / 524288;
+                var Percent = (Files[Name].Downloaded / Files[Name].FileSize) * 100;
+                socket.emit('MoreData', {Place: Place, Percent: Percent});
+            });
+        } else {
+            var Place = Files[Name].Downloaded / 524288;
+            var Percent = (Files[Name].Downloaded / Files[Name].FileSize) * 100;
+            socket.emit('MoreData', {Place: Place, Percent: Percent});
+        }
     });
 });
