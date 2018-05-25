@@ -18,6 +18,7 @@ var unmatchedPwRouter = require('./routes/unmatchedPw');
 
 var app = express();
 var io = require('socket.io').listen(4000);
+var Files = {};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -87,21 +88,23 @@ io.sockets.on('connection', function (socket) {
 
         var place = 0;
 
-        var Stat = fs.statSync('/Temp' + Name);
-        if (Stat.isFile) {
-            Files[Name].Downloaded = Stat.size;
-            place = Stat.size / 524288;
-        }
+        //파일 받은 적이 있다면 연결해서 받으라는 코드인데 파일이 있는지 없는지 우선 검사해야하므로 이건 아직 안됨
+        // var Stat = fs.statSync('/Temp' + Name);
+        // if (Stat.isFile) {
+        //     Files[Name].Downloaded = Stat.size;
+        //     place = Stat.size / 524288;
+        // }
 
         fs.open("Temp/" + Name, "a+", function (err, fd) {
             if (err) console.log(err);
             else {
-                File[Name].Handler = fd;
+                Files[Name].Handler = fd;
                 socket.emit('MoreData', {Place: place, Percent: 0});
             }
         })
     });
     socket.on('Upload', function (data) {
+        console.log(data);
         var Name = data.Name;
         Files[Name].Downloaded += data.Data.length;
         Files[Name].Data += data.Data;
@@ -123,6 +126,7 @@ io.sockets.on('connection', function (socket) {
                         //close fs module
                         if (err) console.error(err);
 
+                        //파일 스트림 연결 끊어줌
                         fs.unlink("Temp/" + Name, function (err) {
                             //Moving file is Completed
                             if (err) console.error(err);
