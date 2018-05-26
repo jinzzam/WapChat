@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<form>
+    <textarea id="nolgoShipda"></textarea>
+    <input type="text" id="mytext" placeholder="그런 글씨를 적으면 돼요." >
+    <input type="button" value="chat" onclick="clk()">
+
+</form>
+
+<script>
+    var socket = io.connect("http://localhost:4000");
+    var roomId = 1;
+    socket.emit('join:room', {roomId: roomId});
+    function clk(){
+        var message = $('#mytext').val();
+        socket.emit('chatReq', {msg:message});//request로 보내고
+    }
+    socket.on('chatRes',function (data) {//chatResponse로 받고
+        console.log(data);
+        $('#nolgoShipda').html($('#nolgoShipda').html()+data+'\n');//채팅내역을 계속 보이기 위한 코드  .html:클라이언트한테 화면이 보임+ 다음.hmtl: 이전의 데이터를 받아옴
+    })
+</script>
+
+</body>
+
+</html>
