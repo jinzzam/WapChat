@@ -4,12 +4,14 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
 
 var io = require('socket.io').listen(4000);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var newchat=require('./routes/chat');
+
+var newchat = require('./routes/chat');
 var chatRouter = require('./routes/chat');
 var conferenceRouter = require('./routes/conference');
 var joinRouter = require('./routes/join');
@@ -19,7 +21,7 @@ var noIDRouter = require('./routes/noID');
 var unmatchedPwRouter = require('./routes/unmatchedPw');
 
 var app = express();
-var io = require('socket.io').listen(4000);
+var io = require('socket.io').listen(4001);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,7 +38,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/chat',newchat);
+
+app.use('/chat', newchat);
 app.use('/chat', chatRouter);
 app.use('/conference-chat', conferenceRouter);
 app.use('/join', joinRouter);
@@ -68,10 +71,88 @@ io.sockets.on('connection', function (socket) {
         console.log('room' + data.roomId);
         socket.join('room' + data.roomId);
     });
-    socket.on('chatReq', function (data) {
+    socket.on('chatReqG', function (data) {
         console.log(data);
         io.sockets.in('room1').emit('chatRes', data.msg);
     });
+
+    socket.on('chatReqC', function (data) {
+        console.log(data);
+        io.sockets.in('room2').emit('chatRes', data.msg);
+    });
+
+
+    socket.on('Start', function (data) {
+        console.log('socket Start!');
+        console.log(data);
+
+        var Name = data.Name;
+        Files[Name] = {
+            FileSize: data.Size,
+            Data: "",
+            Downloaded: 0
+        };
+
+        var place = 0;
+
+        var Stat = fs.statSync('/Temp' + Name);
+        if (Stat.isFile) {
+            Files[Name].Downloaded = Stat.size;
+            place = Stat.size / 524288;
+        }
+
+        fs.open("Temp/" + Name, "a+", function (err, fd) {
+            if (err) console.log(err);
+            else {
+                File[Name].Handler = fd;
+                socket.emit('MoreData', {Place: place, Percent: 0});
+            }
+        })
+    });
+    socket.on('Upload', function (data) {
+        var Name = data.Name;
+        Files[Name].Downloaded += data.Data.length;
+        Files[Name].Data += data.Data;
+        if (Files[Name].Downloaded == Files[Name].FileSize) {
+            fs.write(Files[Name].Handler, Files[Name].Data, null, 'Binary', function (err, written) {
+                if (err) console.log(err);
+                //Generate movie thumnail
+                var readable = fs.createReadStream("Temp/" + Name);
+                var writable = fs.createWriteStream("Video/" + Name);
+
+                readable.pipe(writable);
+
+                writable.on('finish', function (err) {
+                    if (err) console.log(err);
+
+                    console.log(Name + ": writing is completed.");
+
+                    fs.close(Files[Name].Handler, function (err) {
+                        //close fs module
+                        if (err) console.error(err);
+
+                        fs.unlink("Temp/" + Name, function (err) {
+                            //Moving file is Completed
+                            if (err) console.error(err);
+
+                            console.log(Name + "is deleted");
+                        });
+                    });
+                });
+
+            });
+        } else if (Files[Name].Data.length > 10485760) {
+            fs.write(Files[Name].Handler, Files[Name].Data, null, 'Binary', function (err, writtem) {
+                Files[Name].Data = ""; //Reset the Buffer
+                var Place = Files[Name].Downloaded / 524288;
+                var Percent = (Files[Name].Downloaded / Files[Name].FileSize) * 100;
+                socket.emit('MoreData', {Place: Place, Percent: Percent});
+            });
+        } else {
+            var Place = Files[Name].Downloaded / 524288;
+            var Percent = (Files[Name].Downloaded / Files[Name].FileSize) * 100;
+            socket.emit('MoreData', {Place: Place, Percent: Percent});
+        }
+    });
+
 });
-
-

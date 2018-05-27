@@ -14,10 +14,11 @@ router.post('/', function (req, res, next) {
     var id = req.body.user_id;
     var password = req.body.user_pw;
     var verifypw = req.body.verify_pw;
+    var nickname=req.body.user_nickname;
 
     if (password == verifypw) {
         //회원가입 성공
-        var insertsql = 'insert into user values(\'' + name + '\', \'' + birthday + '\', \'' + number + '\', \'' + id + '\', \'' + password + '\')';
+        var insertsql = "insert into user values(\'' + name + '\', \'' + birthday + '\', \'' + number + '\', \'' + id + '\', \'' + password + '\',\''+nickname+'\')";
 
         connection.query(insertsql, function (err, rows, fields) {
             if (!err)

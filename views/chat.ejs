@@ -12,8 +12,14 @@
 <form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
     <label>Type what you want to say: </label>
-    <input type="text" , id="mytext" , placeholder="type anything">
-    <input type="button" value="chat" onclick="clk()">
+    <input type="text" id="mytext" placeholder="type anything">
+    <input type="button" value="chat" onclick="clk()"><br>
+
+    <span id="UploadArea">
+        <label for="fileBox">Choose A File : </label><input type="file" id="fileBox"><br>
+        <label for="nameBox">Name : </label><input type="text" id="nameBox"><br>
+        <button type="button" id="uploadButton">Upload</button>
+    </span>
 </form>
 </body>
 
@@ -24,12 +30,74 @@
 
     function clk() {
         var message = $('#mytext').val();
-        socket.emit('chatReq', {msg: message});
+        socket.emit('chatReqG', {msg: message});
     }
 
     socket.on('chatRes', function (data) {
         console.log(data);
         $('#chat-body').html($('#chat-body').html() + data + '\n');
     })
+    window.addEventListener("load", Ready);
+
+    function Ready() {
+        if (window.File && window.FileReader) {
+            $('#uploadButton').addEventListener('click', StartUpload);
+            $('#fileBox').addEventListener('change', FileChosen);
+        } else {
+            $('#uploadButton').innerHTML = "지원하지 않는 브라우저입니다."
+        }
+    }
+
+    var selectedFile;
+
+    function FileChosen(event) {
+        selectedFile = event.target.file[0];
+        $('#nameBox').value = selectedFile.name;
+    }
+
+    var fileReader;
+    var Name;
+
+    function StartUpload() {
+        if ($('#fileBox').value != "") {
+            fileReader = new fileReader();
+            console.log(selectedFile.type);
+            Name = $('#nameBox').value;
+            var Content = "<span id='NameArea'>Uploading " + SelectedFile.name + " as " + Name + "</span>";
+            Content += "<span id='Uploaded'> - <span id='MB'>0</span>/" + Math.round(SelectedFile.size / 1048576) + "MB</span>";
+            $('#UploadArea').innerHTML = Content;
+            fileReader.onload = function (event) {
+                if (!event) {
+                    var data = fileReader.content;
+                } else {
+                    var data = event.target.result;
+                }
+                socket.emit('Upload', {Name: Name, Data: data});
+            }
+            socket.emit('Start', {Name: Name, Size: selectedFile.size});
+        }
+        else {
+            alert("Please Select A File");
+        }
+    }
+
+    socket.on('MoreData', function (data) {
+        UpdateBar(data.Percent);
+        var Place = data.Place * 524288;
+        var NewFile = "";
+
+        if (selectedFile.webkitSlice)
+            NewFile = selectedFile.webkitSlice(Place, Place + Math.min(524288, (selectedFile.size - Place)));
+        else {
+            NewFile = selectedFile.slice(Place, Place + Math.min(524288, (SelectedFile.size - Place)));
+            fileReader.readAsBinaryString(NewFile);
+        }
+    });
+
+    function UpdateBar(percent) {
+        $('#percent').innerHTML = (Math.round(percent * 100) / 100) + '%';
+        var MBDone = Math.round(((percent / 100.0) * selectedFile.size) / 1048576);
+        $('#MB').innerHTML = MBDone;
+    }
 </script>
 </html>
