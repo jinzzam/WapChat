@@ -1,0 +1,16 @@
+emit: 클라이언트가 서버한테 요청하는 거
+on: 서버가 클라이언트하테 응답하는 거
+
+io.sockets.on('connection', function (socket) {
+    socket.on('join:room', function (data) {
+        console.log('room' + data.roomId);
+        socket.join('room' + data.roomId);
+    });
+    socket.on('chatReq', function (data) {//chatReq를 응답받는 거 
+        console.log(data);
+        io.sockets.in('room1').emit('chatRes', data.msg);
+    });
+});
+
+socket.on('join:room'): 다중접속자이기 떄문에 다 들어와라 
+listening: 대기(예를 들어, 서버는 항상 클라이언트의 요청을 대기하고 있다)
