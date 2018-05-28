@@ -70,10 +70,12 @@ io.sockets.on('connection', function (socket) {
         console.log(data);
         io.sockets.in('room1').emit('chatRes', data.msg);
     });
+    //받는 애
     socket.on('chatReqC', function (data) {
         console.log(data);
-        io.sockets.in('room2').emit('chatRes', data.msg);
+        io.sockets.in('room2').emit('chatRes', data.msg);// 요청
     });
+
 
     socket.on('Start', function (data) {
         console.log('socket Start!');
