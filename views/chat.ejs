@@ -50,16 +50,18 @@
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
-        if (key.keyCode == 13 && message != null) {
+        if (key.keyCode == 13 && message != "") {
             socket.emit('chatReqG', {
                 msg: message
             });
+            $('#mytext').val(null);
+            $('#mytext').focus();
         }
     });
 
-    $('#mytext').val(function (index, item) {
-        return "";
-    });
+    // $('#mytext').val(function (index, item) {
+    //     return "";
+    // });
 
 
     //파일 서버로 받아와서 서버에 저장
