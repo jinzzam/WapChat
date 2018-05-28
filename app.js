@@ -22,7 +22,7 @@ var unmatchedPwRouter = require('./routes/unmatchedPw');
 var modifyInfoRouter = require('./routes/modifyInfo');
 
 var app = express();
-var io = require('socket.io').listen(4001);
+var io = require('socket.io').listen(5000);
 var Files = {};
 
 
@@ -73,6 +73,7 @@ io.sockets.on('connection', function (socket) {
         console.log('room' + data.roomId);
         socket.join('room' + data.roomId);
     });
+
     socket.on('chatReqG', function (data) {
         console.log(data);
         io.sockets.in('room1').emit('chatRes', data.msg);
@@ -84,6 +85,7 @@ io.sockets.on('connection', function (socket) {
     });
 
 
+    //파일 서버로 받아와서 서버에 저장
     socket.on('Start', function (data) {
         console.log('socket Start!');
         console.log(data);
