@@ -35,6 +35,7 @@
         return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="checkBox" value="UploadToCon.table" onclick="chk()"><br>';
     }
 
+
     var socket = io.connect("http://localhost:4000");
     var roomId = 2;
     socket.emit('join:room', {roomId: roomId});
