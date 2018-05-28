@@ -64,3 +64,4 @@ typings/
 #testest
 
 package-lock.json
+.idea

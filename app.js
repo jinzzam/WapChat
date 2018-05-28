@@ -5,13 +5,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
+var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
 
 var io = require('socket.io').listen(4000);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var newchat = require('./routes/chat');
 var chatRouter = require('./routes/chat');
 var conferenceRouter = require('./routes/conference');
 var joinRouter = require('./routes/join');
@@ -73,17 +73,19 @@ io.sockets.on('connection', function (socket) {
         console.log('room' + data.roomId);
         socket.join('room' + data.roomId);
     });
+
     socket.on('chatReqG', function (data) {
         console.log(data);
         io.sockets.in('room1').emit('chatRes', data.msg);
     });
-
+    //받는 애
     socket.on('chatReqC', function (data) {
         console.log(data);
-        io.sockets.in('room2').emit('chatRes', data.msg);
+        io.sockets.in('room2').emit('chatRes', data.msg);// 요청
     });
 
 
+    //파일 서버로 받아와서 서버에 저장
     socket.on('Start', function (data) {
         console.log('socket Start!');
         console.log(data);
