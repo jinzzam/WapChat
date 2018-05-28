@@ -11,9 +11,9 @@
 <form>
     <textarea id="chat-body" readonly rows="20px" itemtype="checkbox" ></textarea><p>
     <!--닉네임 사용여부 기능-->
-    <p>  <label>대화명 선택<br/></label>
-        닉네임 사용:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
-        이름 사용:<input type="radio" name="onlineid" id="onlineid_name" value="">
+    <p> <label>Choose Online_id<br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
     </p>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext"  placeholder="type anything">
@@ -28,7 +28,7 @@
 </form>
 </body>
 <script>
-    var socket = io.connect("http://localhost:4000");
+    var socket = io.connect("http://localhost:5000");
     var roomId = 2;
     socket.emit('join:room', {roomId: roomId});
 
@@ -37,7 +37,6 @@
         socket.emit('chatReqC', {msg: message});
     }
 
-
     socket.on('chatRes', function (data) {
         console.log(data);
         $('#chat-body').html($('#chat-body').html() + data + '\n');
@@ -45,28 +44,16 @@
 
     var socket.io();
     $('#')
-    function usenickname('onlineid_nick'){
-        var nickname=""
+
+    function usenickname(){
+        var usebutton= $('#').val();
+        var printnick = $('#onlineid_nick').val();
+        if()
+        {
+
+        }
 
 
-        var msg=
-        var nickname="nick"
-        socket.emit()
-    }
-
-   /* 이름 : <input type="text" id="name" name="name"><br>
-        생년월일 : <input type="date" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6"><br>
-        전화번호 : <input type="text" id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11"><br>
-        아이디 : <input type="text" id="user_id" name="user_id"><br>
-        비밀번호 : <input type="password" id="user_pw" name="user_pw"><br>
-        비밀번호 확인 : <input type="password" id="verify_pw" name="verify_pw"><br>
-        닉네임 입력 : <input type="text" id="user_nick" name="user_nickname"><br>
-    */
-
-
-    function usename('onlineid_name'){
-        var message=$('#mytext').val();
-        document.write()
     }
 
 
