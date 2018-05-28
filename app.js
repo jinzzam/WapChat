@@ -19,6 +19,7 @@ var joinFailRouter = require('./routes/joinFail');
 var loginRouter = require('./routes/login');
 var noIDRouter = require('./routes/noID');
 var unmatchedPwRouter = require('./routes/unmatchedPw');
+var modifyInfoRouter = require('./routes/modifyInfo');
 
 var app = express();
 var io = require('socket.io').listen(4001);
@@ -40,8 +41,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-app.use('/chat', newchat);
 app.use('/chat', chatRouter);
 app.use('/conference-chat', conferenceRouter);
 app.use('/join', joinRouter);
@@ -49,6 +48,7 @@ app.use('/join-fail', joinFailRouter);
 app.use('/login', loginRouter);
 app.use('/no-id', noIDRouter);
 app.use('/unmatched-pw', unmatchedPwRouter);
+app.use('/modify-info', modifyInfoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
