@@ -11,9 +11,12 @@
 <body>
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
-<input type="button" id="gochat" name="gochat" value="Let's Chat" onclick="location.href='/chat'">
-<input type="button" id="goconference" name="conference chat" value="Conference"
+<input type="button"  class="btn btn-info btn-lg " id="gochat" name="gochat" value="Let's Chat" onclick="location.href='/chat'">
+<input type="button"  class="btn btn-info btn-lg " id="goconference" name="conference chat" value="Conference"
        onclick="location.href='/conference-chat'">
+<input type="button" class="btn btn-info btn-lg" id="gojoin" name="gojoin" value="Join" onclick="location.href='/join'">
+<input type="button" class="btn btn-info btn-lg" id="gologin" name="gologin" value="Login" onclick="location.href='/login'">
+
 <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

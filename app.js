@@ -5,9 +5,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
+var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
+
+var io = require('socket.io').listen(4000);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 var chatRouter = require('./routes/chat');
 var conferenceRouter = require('./routes/conference');
 var joinRouter = require('./routes/join');
@@ -15,10 +19,12 @@ var joinFailRouter = require('./routes/joinFail');
 var loginRouter = require('./routes/login');
 var noIDRouter = require('./routes/noID');
 var unmatchedPwRouter = require('./routes/unmatchedPw');
+var modifyInfoRouter = require('./routes/modifyInfo');
 
 var app = express();
-var io = require('socket.io').listen(4000);
+var io = require('socket.io').listen(5000);
 var Files = {};
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,6 +48,7 @@ app.use('/join-fail', joinFailRouter);
 app.use('/login', loginRouter);
 app.use('/no-id', noIDRouter);
 app.use('/unmatched-pw', unmatchedPwRouter);
+app.use('/modify-info', modifyInfoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -66,6 +73,7 @@ io.sockets.on('connection', function (socket) {
         console.log('room' + data.roomId);
         socket.join('room' + data.roomId);
     });
+
     socket.on('chatReqG', function (data) {
         console.log(data);
         io.sockets.in('room1').emit('chatRes', data.msg);
@@ -77,6 +85,7 @@ io.sockets.on('connection', function (socket) {
     });
 
 
+    //파일 서버로 받아와서 서버에 저장
     socket.on('Start', function (data) {
         console.log('socket Start!');
         console.log(data);
@@ -152,4 +161,5 @@ io.sockets.on('connection', function (socket) {
             socket.emit('MoreData', {Place: Place, Percent: Percent});
         }
     });
+
 });

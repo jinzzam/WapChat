@@ -3,7 +3,7 @@ var connection = require('../public/javascripts/dbconnection');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res, next) {//가입페이지 이동
     res.render('join', {title: 'Join'});
 });
 
@@ -14,10 +14,11 @@ router.post('/', function (req, res, next) {
     var id = req.body.user_id;
     var password = req.body.user_pw;
     var verifypw = req.body.verify_pw;
+    var nickname=req.body.user_nickname;
 
     if (password == verifypw) {
         //회원가입 성공
-        var insertsql = 'insert into user values(\'' + name + '\', \'' + birthday + '\', \'' + number + '\', \'' + id + '\', \'' + password + '\')';
+        var insertsql = "insert into user values(\'' + name + '\', \'' + birthday + '\', \'' + number + '\', \'' + id + '\', \'' + password + '\',\''+nickname+'\')";
 
         connection.query(insertsql, function (err, rows, fields) {
             if (!err)
