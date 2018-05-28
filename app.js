@@ -21,12 +21,9 @@ var noIDRouter = require('./routes/noID');
 var unmatchedPwRouter = require('./routes/unmatchedPw');
 
 var app = express();
-<<<<<<< HEAD
 var io = require('socket.io').listen(4001);
-=======
-var io = require('socket.io').listen(4000);
 var Files = {};
->>>>>>> c81feeb4752d5c04348abe34cba296427c02b75d
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

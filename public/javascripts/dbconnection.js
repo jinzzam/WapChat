@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -11,7 +11,7 @@ connection.connect();
 
 module.exports = connection;
 
-=======
+
 // var mysql = require('mysql');
 // var connection = mysql.createConnection({
 //     host: 'localhost',
@@ -23,4 +23,4 @@ module.exports = connection;
 // connection.connect();
 //
 // module.exports = connection;
->>>>>>> c81feeb4752d5c04348abe34cba296427c02b75d
+
