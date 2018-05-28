@@ -5,13 +5,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
-var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
-
+//var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
 var io = require('socket.io').listen(4000);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 var chatRouter = require('./routes/chat');
 var conferenceRouter = require('./routes/conference');
 var joinRouter = require('./routes/join');
@@ -22,7 +20,6 @@ var unmatchedPwRouter = require('./routes/unmatchedPw');
 var modifyInfoRouter = require('./routes/modifyInfo');
 
 var app = express();
-var io = require('socket.io').listen(5000);
 var Files = {};
 
 

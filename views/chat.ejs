@@ -11,15 +11,9 @@
 <form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
     <!--닉네임 사용여부 기능-->
-<<<<<<< HEAD
-    <p> <label>Choose Online_id<br/></label>
+    <p><label>Choose Online_id<br/></label>
         Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
         Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
-=======
-    <p><label>대화명 선택<br/></label>
-        닉네임 사용:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
-        이름 사용:<input type="radio" name="onlineid" id="onlineid_name" value="">
->>>>>>> ecede70101b950103f08c968ca679f18c8bbd1fe
     </p>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext" placeholder="type anything">
@@ -39,7 +33,7 @@
 </body>
 
 <script>
-    var socket = io.connect("http://localhost:5000");
+    var socket = io.connect("http://localhost:4000");
     var roomId = 1;
     socket.emit('join:room', {roomId: roomId});
 
@@ -137,7 +131,7 @@
         var MBDone = Math.round(((percent / 100.0) * selectedFile.size) / 1048576);
         $('#MB').html(MBDone);
     }
-<<<<<<< HEAD
+
     <!--대화명 사용-->
     /*
     function usenickname(){

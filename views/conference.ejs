@@ -21,7 +21,7 @@
     <input type="button" value="chat" onclick="clk()">
     <input type="checkbox" id="checkbox" value="UploadToCon.table">UploadToContentTable<br>
     <br>
-    회의 안건 개수를 입력하세요 : <input type="text" id="agendacount" placeholder="숫자로만 입력하세요"><input type="submit"
+    회의 안건 개수를 입력하세요 : <input type="text" id="agendacount" placeholder="숫자로만 입력하세요"><input type="button"
                                                                                           value="개수입력"><br>
     <textarea id="conference-table" readonly rows="20px" placeholder="회의 안건이 비어있습니다."></textarea><br>
     <input type="button" id="deletingButton" value="Delete">
@@ -29,7 +29,7 @@
 </form>
 </body>
 <script>
-    var socket = io.connect("http://localhost:5000");
+    var socket = io.connect("http://localhost:4000");
     var arr = [];
 
     function f(data) {
@@ -46,12 +46,22 @@
 
     socket.on('chatRes', function (data) {
         console.log(data);
-        arr.push(f(data));
-        $('#chat-body').html($('#chat-body').html() + arr[arr.length - 1] + '\n');
+        //arr.push(f(data));
+        $('#chat-body').html($('#chat-body').html() + data + '\n');
+    });
+
+    $('#mytext').keydown(function (key) {
+        var message = $('#mytext').val();
+        if (key.keyCode == 13 && message != null) {
+            socket.emit('chatReqC', {
+                msg: message
+            });
+            $('#mytext').val(null);
+            $('#mytext').focus();
+        }
     });
 
     //var socket.io();
-    $('#');
 
     // function usenickname(){
     //     var usebutton= $('#').val();
@@ -61,18 +71,6 @@
     //
     //     }
 
-
-    }
-    $('#mytext').keydown(function (key) {
-        var message = $('#mytext').val();
-        if (key.keyCode == 13 && message != "") {
-            socket.emit('chatReqC', {
-                msg: message
-            });
-            $('#mytext').val(null);
-            $('#mytext').focus();
-        }
-    });
 
     // $('#mytext').val(function (index, item) {
     //     return "";
