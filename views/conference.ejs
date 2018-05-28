@@ -9,12 +9,12 @@
 <body>
 <h1>WAP Conference Chat</h1>
 <form>
-    <textarea id="chat-body" readonly rows="20px" itemtype="checkbox"></textarea>
-    <p>
-        <!--닉네임 사용여부 기능-->
-    <p><label>대화명 선택<br/></label>
-        닉네임 사용:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
-        이름 사용:<input type="radio" name="onlineid" id="onlineid_name" value="">
+    <div id="chat-body" rows="20px" itemtype="checkbox"
+         style="border: 1px solid;width:50%;height: 300px;overflow:scroll;"></div>
+    <!--닉네임 사용여부 기능-->
+    <p><label>Choose Online_id<br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
     </p>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext" placeholder="type anything">
@@ -30,6 +30,12 @@
 </body>
 <script>
     var socket = io.connect("http://localhost:5000");
+    var arr = [];
+
+    function f(data) {
+        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="checkBox" value="UploadToCon.table" onclick="chk()"><br>';
+    }
+
     var roomId = 2;
     socket.emit('join:room', {roomId: roomId});
 
@@ -40,9 +46,23 @@
 
     socket.on('chatRes', function (data) {
         console.log(data);
-        $('#chat-body').html($('#chat-body').html() + data + '\n');
+        arr.push(f(data));
+        $('#chat-body').html($('#chat-body').html() + arr[arr.length - 1] + '\n');
     });
 
+    //var socket.io();
+    $('#');
+
+    // function usenickname(){
+    //     var usebutton= $('#').val();
+    //     var printnick = $('#onlineid_nick').val();
+    //     if()
+    //     {
+    //
+    //     }
+
+
+    }
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
         if (key.keyCode == 13 && message != "") {
@@ -58,6 +78,7 @@
     //     return "";
     // });
 
+
     // function usenickname('onlineid_nick'){
     //     var
     // }
@@ -65,7 +86,6 @@
     // function usename('onlineid_name'){
     //     var
     // }
-
 
 </script>
 
