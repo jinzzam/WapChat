@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conference Chat</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+</head>
+<body>
+<h1>WAP Conference Chat</h1> /
+<form>
+    <textarea id="chat-body" readonly rows="20px" itemtype="checkbox" ></textarea><p>
+    <!--닉네임 사용여부 기능-->
+    <p>  <label>대화명 선택<br/></label>
+        닉네임 사용:<input type="radio" name="onlineid" value="[return value from usenickname fuction]" checked>
+        이름 사용:<input type="radio" name="onlineid" value="[return value from usename fuction]">
+    </p>
+    <br/>
+    <label>Type what you want to say: </label>
+<<<<<<< HEAD
+    <input type="text" id="mytext" placeholder="type anything">
+    <input type="button"  value="chat" onclick="clk()">
+=======
+    <input type="text" id="mytext"  placeholder="type anything">
+    <input type="button" value="chat" onclick="clk()">
+    <input type="checkbox" id="checkbox" value="UploadToCon.table">UploadToContentTable<br>
+>>>>>>> f78e95247a439b4293e5f49f676a5cc72fa7ce11
+    <br>
+    회의 안건 개수를 입력하세요 : <input type="text" id="agendacount" placeholder="숫자로만 입력하세요"><input type="submit"
+                                                                                          value="개수입력"><br>
+    <textarea id="conference-table" readonly rows="20px" placeholder="회의 안건이 비어있습니다."></textarea><br>
+    <input type="button" id="deletingButton" value="Delete">
+    <input type="button" id="exportingButton" value="Export"><br>
+</form>
+</body>
+<script>
+    var socket = io.connect("http://localhost:4000");
+    var roomId = 2;
+    socket.emit('join:room', {roomId: roomId});
+
+    function clk() {
+        var message = $('#mytext').val();
+        socket.emit('chatReqC', {msg: message});
+    }
+
+
+    socket.on('chatRes', function (data) {
+        console.log(data);
+        $('#chat-body').html($('#chat-body').html() + data + '\n');
+    });
+
+    function usenickname(){
+        var
+    }
+
+    function usename(){
+        var
+    }
+
+
+</script>
+
+</html>
