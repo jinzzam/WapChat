@@ -8,18 +8,16 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+    var selectpwsql = 'select password from user where id=?';
 
-    var updatesql = "";
+    var updatenamesql = 'select name from user where id=? and pw=?';
+    var updatebirthdaysql = 'select birthday date from user where id=? and pw=?';
+    var updatephonenumbsql = 'select  phonenumber from user where id=? and pw=?';
+    var updateidsql = 'select password from user where id=? and pw=?';
+    var updatepwsql = 'select id from user where id=? and pw=?';
+    var updatepwsql = 'select password from user where id=? and pw=?';
 
-    connection.query(updatesql, function (err, rows, fields) {
-        if (!err)
-            console.log('The solution is ', rows);
-        else
-            console.log('Error while performing Query.', err);
 
-    });
-    connection.end();
-    res.redirect("/");
-})
-
+    //connection.end();
+});
 module.exports = router;

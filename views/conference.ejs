@@ -12,16 +12,16 @@
     <div id="chat-body" rows="20px" itemtype="checkbox"
          style="border: 1px solid;width:50%;height: 300px;overflow:scroll;"></div>
     <!--닉네임 사용여부 기능-->
-    <p>  <label>대화명 선택<br/></label>
-        닉네임 사용:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
-        이름 사용:<input type="radio" name="onlineid" id="onlineid_name" value="">
+    <p><label>Choose Online_id<br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
     </p>
     <label>Type what you want to say: </label>
-    <input type="text" id="mytext"  placeholder="type anything">
+    <input type="text" id="mytext" placeholder="type anything">
     <input type="button" value="chat" onclick="clk()">
     <input type="checkbox" id="checkbox" >UploadToContentTable<br>
     <br>
-    회의 안건 개수를 입력하세요 : <input type="text" id="agendacount" placeholder="숫자로만 입력하세요"><input type="submit"
+    회의 안건 개수를 입력하세요 : <input type="text" id="agendacount" placeholder="숫자로만 입력하세요"><input type="button"
                                                                                           value="개수입력"><br>
     <textarea id="conference-table" readonly rows="20px" placeholder="회의 안건이 비어있습니다."></textarea><br>
     <input type="button" id="deletingButton" value="Delete">
@@ -29,6 +29,7 @@
 </form>
 </body>
 <script>
+    var socket = io.connect("http://localhost:4000");
     var arr = [];
     var aaa= '<input type="checkbox" id="checkBox" onclick="chk()">';
     
@@ -46,11 +47,10 @@
         socket.emit('chatReqC', {msg: message});
     }
 
-
     socket.on('chatRes', function (data) {
         console.log(data);
-        arr.push(f(data));
-        $('#chat-body').html($('#chat-body').html() + arr[arr.length - 1] + '\n');
+        //arr.push(f(data));
+        $('#chat-body').html($('#chat-body').html() + data + '\n');
     });
 
     $('#mytext').keydown(function (key) {
@@ -59,12 +59,26 @@
             socket.emit('chatReqC', {
                 msg: message
             });
+            $('#mytext').val(null);
+            $('#mytext').focus();
         }
     });
 
-    $('#mytext').val(function (index, item) {
-        //return "";
-    });
+    //var socket.io();
+
+    // function usenickname(){
+    //     var usebutton= $('#').val();
+    //     var printnick = $('#onlineid_nick').val();
+    //     if()
+    //     {
+    //
+    //     }
+
+
+    // $('#mytext').val(function (index, item) {
+    //     return "";
+    // });
+
 
     // function usenickname('onlineid_nick'){
     //     var
