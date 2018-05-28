@@ -12,10 +12,9 @@
     <textarea id="chat-body" readonly rows="20px" itemtype="checkbox" ></textarea><p>
     <!--닉네임 사용여부 기능-->
     <p>  <label>대화명 선택<br/></label>
-        닉네임 사용:<input type="radio" name="onlineid" value="[return value from usenickname fuction]" checked>
-        이름 사용:<input type="radio" name="onlineid" value="[return value from usename fuction]">
+        닉네임 사용:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
+        이름 사용:<input type="radio" name="onlineid" id="onlineid_name" value="">
     </p>
-    <br/>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext"  placeholder="type anything">
     <input type="button" value="chat" onclick="clk()">
@@ -44,11 +43,11 @@
         $('#chat-body').html($('#chat-body').html() + data + '\n');
     });
 
-    function usenickname(){
+    function usenickname('onlineid_nick'){
         var
     }
 
-    function usename(){
+    function usename('onlineid_name'){
         var
     }
 
