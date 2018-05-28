@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "connect-redis": "^3.3.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
@@ -17,6 +18,7 @@
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
     "q": "^1.5.1",
+    "redis": "^2.8.0",
     "socket.io": "^2.1.1",
     "socket.io-stream": "^0.9.1"
   }
