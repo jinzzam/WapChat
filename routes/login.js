@@ -33,7 +33,7 @@ router.post('/', function (req, res, next) {
     //connection.end();
 });
 
-router.post('/sessionlogin',function(request,response){
+router.post('/',function(request,response){
     if(request.session.key){
         console.log('유효 세션('+request.session.key+')');
         response.send('유효한 세션입니다.');
