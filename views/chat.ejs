@@ -13,7 +13,6 @@
 </head>
 <body>
 <h1>WAP General chat</h1>
-<form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
 
     <!--닉네임 사용여부 기능-->
@@ -36,7 +35,6 @@
     </div>
     <input type="button">
 
-</form>
 <script src="/js/bootstrap.min.js"></script>
 </body>
 
@@ -68,7 +66,9 @@
         var message = $('#mytext').val();
         if (key.keyCode == 13 && message != "") {
             socket.emit('chatReqG', {
-                msg: message
+                msg: message,
+                user_id: '<%= user_id %>',
+                checked_id: $('#onlineid_nick').is(':checked')
             });
             $('#mytext').val(null);
             $('#mytext').focus();
