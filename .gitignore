@@ -65,4 +65,3 @@ typings/
 
 package-lock.json
 .idea
-dbconnection.js
