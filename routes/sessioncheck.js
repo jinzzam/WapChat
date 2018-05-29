@@ -1,4 +1,4 @@
-router.get('/', function(request,response) {
+router.get('/sessioncheck', function(request,response) {
     if (request.session.key) {
         console.log('세션이 존재합니다.(' + request.session.key + ')');
         response.send('현재 로그인 상태입니다.');
@@ -9,7 +9,7 @@ router.get('/', function(request,response) {
     }
 });
 
-router.get('/',function(request,response){
+router.get('/sessionlogout',function(request,response){
     request.session.destroy(function(err)
     {
         if (err) {
