@@ -11,9 +11,9 @@
 <form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
     <!--닉네임 사용여부 기능-->
-    <p>  <label>대화명 선택<br/></label>
-        닉네임 사용:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
-        이름 사용:<input type="radio" name="onlineid" id="onlineid_name" value="">
+    <p><label>Choose Online_id<br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
     </p>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext" placeholder="type anything">
@@ -45,7 +45,21 @@
     socket.on('chatRes', function (data) {
         console.log(data);
         $('#chat-body').html($('#chat-body').html() + data + '\n');
-    })
+    });
+
+
+    $('#mytext').keydown(function (key) {
+        var message = $('#mytext').val();
+        if (key.keyCode == 13 && message != "") {
+            socket.emit('chatReqG', {
+                msg: message
+            });
+            $('#mytext').val(null);
+            $('#mytext').focus();
+        }
+    });
+
+    //파일 서버로 받아와서 서버에 저장
     window.addEventListener("load", Ready);
 
     function Ready() {
@@ -112,14 +126,41 @@
         var MBDone = Math.round(((percent / 100.0) * selectedFile.size) / 1048576);
         $('#MB').html(MBDone);
     }
+
     <!--대화명 사용-->
-    function usenickname('onlineid_nick'){
-        var
-            }
+    /*
+    function usenickname(){
+        var printnick = $('#onlineid_nick').val();
+        if(onclick="clk()")
+            {
 
-    function usename('onlineid_name'){
-        var
             }
+=======
 
+    //
+    <!--대화명 사용-->
+    // function usenickname(
+    //
+    // 'onlineid_nick'
+    // )
+    // {
+    //     var
+    //         }
+    //
+    // function usename(
+    //
+    // 'onlineid_name'
+    // )
+    // {
+    //     var
+    //         }
+>>>>>>> ecede70101b950103f08c968ca679f18c8bbd1fe
+
+
+    }
+    function usename(){
+        var printnick = $('#onlineid_name').val();
+            }
+*/
 </script>
 </html>
