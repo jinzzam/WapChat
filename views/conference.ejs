@@ -17,7 +17,7 @@
     <div id="chat-body" rows="20px" itemtype="checkbox"
          style="border: 1px solid;width:50%;height: 300px;overflow:scroll;"></div>
     <!--닉네임 사용여부 기능-->
-    <p><label>Choose Online_id<br/></label>
+    <p><label>Choose Online_id: <br/></label>
         Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
         Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
     </p>
@@ -35,10 +35,7 @@
 <script src="/js/bootstrap.min.js"></script>
 </body>
 <script>
-<<<<<<< HEAD
-=======
-    var socket = io.connect("http://localhost:4000");
->>>>>>> 954b9a1bb1bebd24512e9c239de4b932741b8c30
+    var socket = io.connect("http://localhost:5000");
     var arr = [];
     var aaa= '<input type="checkbox" id="checkBox" onclick="chk()">';
     
@@ -46,12 +43,7 @@
         return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+aaa+'<br>';
     }
 
-<<<<<<< HEAD
     var socket = io.connect("http://localhost:5000");
-=======
-
-    var socket = io.connect("http://localhost:4000");
->>>>>>> 954b9a1bb1bebd24512e9c239de4b932741b8c30
     var roomId = 2;
     socket.emit('join:room', {roomId: roomId});
 
@@ -66,7 +58,6 @@
         $('#chat-body').html($('#chat-body').html() + data + '\n');
     });
 
-<<<<<<< HEAD
     var socket.io();
     $('#')
 
@@ -80,8 +71,6 @@
 
 
     }
-=======
->>>>>>> 954b9a1bb1bebd24512e9c239de4b932741b8c30
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
         if (key.keyCode == 13 && message != null) {
@@ -93,12 +82,10 @@
         }
     });
 
-<<<<<<< HEAD
     $('#mytext').val(function (index, item) {
         //return "";
     });
     <!--대화명 사용_code 변경예정-->
-=======
     //var socket.io();
 
     // function usenickname(){
@@ -109,7 +96,6 @@
     //
     //     }
     
->>>>>>> 954b9a1bb1bebd24512e9c239de4b932741b8c30
     // function usenickname('onlineid_nick'){
     //     var
     // }
