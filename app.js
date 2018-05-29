@@ -18,10 +18,17 @@ var loginRouter = require('./routes/login');
 var noIDRouter = require('./routes/noID');
 var unmatchedPwRouter = require('./routes/unmatchedPw');
 var modifyInfoRouter = require('./routes/modifyInfo');
+var logoutRouter = require('./routes/logout');
 
 var app = express();
 var Files = {};
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {secure: false}
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,6 +53,8 @@ app.use('/login', loginRouter);
 app.use('/no-id', noIDRouter);
 app.use('/unmatched-pw', unmatchedPwRouter);
 app.use('/modify-info', modifyInfoRouter);
+app.use('/logout', logoutRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
