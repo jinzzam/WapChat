@@ -37,17 +37,5 @@ router.post('/', function (req, res, next) {
     //connection.end();
 });
 
-// router.post('/',function(request,response){
-//     if(request.session.key){
-//         console.log('유효 세션('+request.session.key+')');
-//         response.send('유효한 세션입니다.');
-//     }
-//     else{
-//         request.session.key=request.body.id;
-//         console.log('세션이 보관되었습니다'+request.session.key+')');
-//         response.send('세션이 성공적으로 보관되었습니다.');
-//     }
-// });
-
 module.exports = router;
 

@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
-var session =require('express-session');
+var session = require('express-session');
 var io = require('socket.io').listen(4000);
 
 var indexRouter = require('./routes/index');
@@ -19,6 +19,8 @@ var noIDRouter = require('./routes/noID');
 var unmatchedPwRouter = require('./routes/unmatchedPw');
 var modifyInfoRouter = require('./routes/modifyInfo');
 var logoutRouter = require('./routes/logout');
+var connection = require('./public/javascripts/dbconnection');
+
 
 var app = express();
 var Files = {};
@@ -82,7 +84,17 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('chatReqG', function (data) {
         console.log(data);
-        io.sockets.in('room1').emit('chatRes', data.msg);
+        var selectnamesql = 'select name from user where id=?';
+        connection.query(selectnamesql, data.user_id, function (err, rows, fields) {
+            console.log(rows[0].name);
+            if (data.checked_id) {
+                io.sockets.in('room1').emit('chatRes', data);
+            } else {
+                data.user_id = undefined;
+                data.user_name = rows[0].name;
+                io.sockets.in('room1').emit('chatRes', data);
+            }
+        });
     });
     //받는 애
     socket.on('chatReqC', function (data) {
