@@ -3,16 +3,26 @@
 <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/kfonts2.css" rel="stylesheet">
     <meta charset="utf-8"/>
 </head>
 <body>
 
-<!-- 로그인폼 -->
-<form action="/login" method="post">
-    아이디 : <input name="user_id" type="text"/><br/>
-    비밀번호 : <input name="user_pw" type="password"/><br/>
-    <input value="로그인" type="submit"/>
-</form>
 
+<!-- 로그인폼 -->
+<form action="/login" class="form-group" method="post">
+    <div class="form-group form-group-lg">
+        <span class="input-group-addon" id="sizing-addon1">ID</span>
+    <input name="user_id" type="text" class="form-control" placeholder="id를 입력하세요" aria-describedby="sizing-addon1"/><br/>
+    </div>
+    <div class="form-group form-group-lg">
+        <span class="input-group-addon" id="sizing-addon1">PW</span>
+    <input name="user_pw" type="password" class="form-control" placeholder="pw를 입력하세요" aria-describedby="sizing-addon1"/><br/>
+    <input value="로그인" type="submit" class="form-control btn btn-primary"/>
+    </div>
+</form>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
