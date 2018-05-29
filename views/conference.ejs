@@ -5,6 +5,11 @@
     <title>Conference Chat</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/kfonts2.css" rel="stylesheet">
+
 </head>
 <body>
 <h1>WAP Conference Chat</h1>
@@ -27,6 +32,7 @@
     <input type="button" id="deletingButton" value="Delete">
     <input type="button" id="exportingButton" value="Export"><br>
 </form>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 <script>
     var socket = io.connect("http://localhost:4000");
