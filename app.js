@@ -5,9 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
-var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
-
-var io = require('socket.io').listen(4000);
+//var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

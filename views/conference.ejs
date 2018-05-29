@@ -29,17 +29,13 @@
 </form>
 </body>
 <script>
-<<<<<<< HEAD
-    var socket = io.connect("http://localhost:5000");
-=======
     var arr = [];
 
     function f(data) {
         return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="checkBox" value="UploadToCon.table" onclick="chk()"><br>';
     }
 
-    var socket = io.connect("http://localhost:4000");
->>>>>>> ecede70101b950103f08c968ca679f18c8bbd1fe
+    var socket = io.connect("http://localhost:5000");
     var roomId = 2;
     socket.emit('join:room', {roomId: roomId});
 
@@ -54,7 +50,6 @@
         $('#chat-body').html($('#chat-body').html() + arr[arr.length - 1] + '\n');
     });
 
-<<<<<<< HEAD
     var socket.io();
     $('#')
 
@@ -68,7 +63,6 @@
 
 
     }
-=======
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
         if (key.keyCode == 13 && message != null) {
@@ -81,8 +75,7 @@
     $('#mytext').val(function (index, item) {
         //return "";
     });
->>>>>>> ecede70101b950103f08c968ca679f18c8bbd1fe
-
+    <!--대화명 사용_code 변경예정-->
     // function usenickname('onlineid_nick'){
     //     var
     // }
