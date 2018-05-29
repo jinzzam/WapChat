@@ -4,12 +4,15 @@
     <title><%= title %></title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/kfonts2.css" rel="stylesheet">
 </head>
 <body>
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 
-<form method="post" name="membership">
+<form method="post" class="form-group" name="membership">
     이름 : <input type="text" id="name" name="name"><br>
     생년월일 : <input type="date" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6"><br>
     전화번호 : <input type="text" id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11"><br>
@@ -20,5 +23,6 @@
     <input type="submit" value="회원가입 하기">
 
 </form>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
