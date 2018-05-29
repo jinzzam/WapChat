@@ -15,7 +15,6 @@ router.post('/', function (req, res, next) {
     var updatephonenumbsql = 'select  phonenumber from user where id=? and pw=?';
     var updateidsql = 'select id from user where id=? and pw=?';
     var updatepwsql = 'select password from user where id=? and pw=?';
-<<<<<<< HEAD
     var updatenicksql = 'select nickname from user where id=? and pw=?';
         /* db 정보갱신 코드_변경 예정
     connection.query("UPDATE user SET name=?, birthday date=?, phonenumber=?,id=?,password=?,nickname=? where name=?, birthday date=?, phonenumber=?,id=?,password=?,nickname=?"
@@ -30,7 +29,6 @@ router.post('/', function (req, res, next) {
         })
     connection.end();
     */
-=======
 
 
 
@@ -60,6 +58,5 @@ router.post('/', function (req, res, next) {
 
 
     //connection.end();
->>>>>>> 9365d03e56e66dbb9e83836793f6485048f1e9e7
 });
 module.exports = router;

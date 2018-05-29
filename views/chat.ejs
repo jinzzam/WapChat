@@ -38,7 +38,7 @@
 </body>
 
 <script>
-    var socket = io.connect("http://localhost:5000");
+    var socket = io.connect("http://localhost:4000");
     var roomId = 1;
     socket.emit('join:room', {roomId: roomId});
 
@@ -53,13 +53,12 @@
         if($('#onlineid_nick').val()==checked){
             /*var onlinenidk=$('#onlineid_nick').val()*/
 
-            $('#onlineid_nick').html+':'+$('#chat-body').html($('#chat-body').html() + data + '\n');
+            $('#onlineid_nick').html()+':'+$('#chat-body').html($('#chat-body').html() + data + '\n');
 
-        }else
-        {
-            var onlinename
-            $('#onlineid_nick').val()
-            $('#onlineid_name').val().html+':'+$('#chat-body').html($('#chat-body').html() + data + '\n');
+        }else {
+            // var onlinename
+            $('#onlineid_nick').val();
+            $('#onlineid_name').val().html() + ':' + $('#chat-body').html($('#chat-body').html() + data + '\n');
         }
 
        // $('#chat-body').html($('#chat-body').html() + data + '\n'); 원래 있던 것

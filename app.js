@@ -7,11 +7,8 @@ var logger = require('morgan');
 var fs = require('fs');
 
 //var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
-var session =require('express-session');
-var io = require('socket.io').listen(5000);
-=======
-var session =require('express-session');
 var io = require('socket.io').listen(4000);
+var session =require('express-session');
 
 
 var indexRouter = require('./routes/index');
