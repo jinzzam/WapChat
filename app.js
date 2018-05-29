@@ -6,7 +6,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
 var session = require('express-session');
+
 var io = require('socket.io').listen(4000);
+var session =require('express-session');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

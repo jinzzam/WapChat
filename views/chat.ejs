@@ -15,11 +15,12 @@
 <h1>WAP General chat</h1>
 <form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
+
     <!--닉네임 사용여부 기능-->
-    <p><label>Choose Online_id<br/></label>
-        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenickname" onclick=""
+    <p><label>Choose Online_id: <br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" onclick=""
                               javascript:radio_check(usenickname) checked>
-        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="usename">
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
     </p>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext" placeholder="type anything">
@@ -61,10 +62,7 @@
         } else {
             $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + data.msg + '\n');
         }
-
-        // $('#chat-body').html($('#chat-body').html() + data + '\n'); 원래 있던 것
     });
-
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
