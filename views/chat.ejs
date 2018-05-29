@@ -5,15 +5,20 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/kfonts2.css" rel="stylesheet">
+
 </head>
 <body>
 <h1>WAP General chat</h1>
 <form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
     <!--닉네임 사용여부 기능-->
-    <p><label>Choose Online_id<br/></label>
-        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
-        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
+    <p> <label>Choose Online_id<br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenickname" onclick=""javascript:radio_check(usenickname) checked>
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="usename">
     </p>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext" placeholder="type anything">
@@ -30,6 +35,7 @@
     <input type="button">
 
 </form>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 
 <script>
@@ -44,7 +50,16 @@
 
     socket.on('chatRes', function (data) {
         console.log(data);
-        $('#chat-body').html($('#chat-body').html() + data + '\n');
+        //nickname을 사용해서 나타내줄건지 아니면 name을 사용할건지_표현
+        if($('#onlineid_nick').val()==checked){
+            $('#onlineid_nick').val().html+':'+$('#chat-body').html($('#chat-body').html() + data + '\n');
+
+        }else
+        {
+            $('#onlineid_name').val().html+':'+$('#chat-body').html($('#chat-body').html() + data + '\n');
+        }
+
+       // $('#chat-body').html($('#chat-body').html() + data + '\n'); 원래 있던 것
     });
 
 
@@ -126,41 +141,15 @@
         var MBDone = Math.round(((percent / 100.0) * selectedFile.size) / 1048576);
         $('#MB').html(MBDone);
     }
+    /* <!--대화명 사용_code 변경예정-->
+    function usenickname() {
 
-    <!--대화명 사용-->
-    /*
-    function usenickname(){
-        var printnick = $('#onlineid_nick').val();
-        if(onclick="clk()")
-            {
-
-            }
-=======
-
-    //
-    <!--대화명 사용-->
-    // function usenickname(
-    //
-    // 'onlineid_nick'
-    // )
-    // {
-    //     var
-    //         }
-    //
-    // function usename(
-    //
-    // 'onlineid_name'
-    // )
-    // {
-    //     var
-    //         }
->>>>>>> ecede70101b950103f08c968ca679f18c8bbd1fe
-
-
-    }
     function usename(){
         var printnick = $('#onlineid_name').val();
-            }
-*/
+    }
+
+    var printnick = $('#onlineid_nick').val();
+    */
+
 </script>
 </html>
