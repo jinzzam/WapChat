@@ -43,6 +43,12 @@
         return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + aaa + '<br>';
     }
 
+    function chk(data){
+        if('checkBox'==checked){
+            //conference-table에 데이터 옮기기
+        }
+    }
+
     var socket = io.connect("http://localhost:4000");
 
     var roomId = 2;
@@ -55,19 +61,9 @@
 
     socket.on('chatRes', function (data) {
         console.log(data);
-        //arr.push(f(data));
-        $('#chat-body').html($('#chat-body').html() + data + '\n');
+        arr.push(f(data));
+        $('#chat-body').html($('#chat-body').html() + arr[arr.length-1] + '\n');
     });
-
-
-    // function usenickname(){
-    //     var usebutton= $('#').val();
-    //     var printnick = $('#onlineid_nick').val();
-    //     if()
-    //     {
-    //
-    //     }
-
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
@@ -79,26 +75,6 @@
             $('#mytext').focus();
         }
     });
-
-
-    <!--대화명 사용_code 변경예정-->
-    //var socket.io();
-
-    // function usenickname(){
-    //     var usebutton= $('#').val();
-    //     var printnick = $('#onlineid_nick').val();
-    //     if()
-    //     {
-    //
-    //     }
-
-    // function usenickname('onlineid_nick'){
-    //     var
-    // }
-    //
-    // function usename('onlineid_name'){
-    //     var
-    // }
 
 </script>
 
