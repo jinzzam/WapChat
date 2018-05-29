@@ -24,21 +24,18 @@
     <label>Type what you want to say: </label>
     <input type="text" id="mytext" placeholder="type anything">
     <input type="button" value="chat" onclick="clk()">
-    <input type="checkbox" id="checkbox">UploadToContentTable<br>
     <br>
     회의 안건 개수를 입력하세요 : <input type="text" id="agendacount" placeholder="숫자로만 입력하세요"><input type="button"
                                                                                           value="개수입력"><br>
-    <textarea id="conference-table" readonly rows="20px" placeholder="회의 안건이 비어있습니다."></textarea><br>
+    <div id="conference-table" readonly rows="20px" itemtype="checkbox" style="border: 1px solid;width:50%;height: 300px;overflow:scroll"></div><br>
     <input type="button" id="deletingButton" value="Delete">
     <input type="button" id="exportingButton" value="Export"><br>
 </form>
 <script src="/js/bootstrap.min.js"></script>
 </body>
 <script>
-<<<<<<< HEAD
     var socket = io.connect("http://localhost:5000");
-=======
->>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
+
     var arr = [];
     var aaa = '<input type="checkbox" id="checkBox" onclick="chk()">';
 
@@ -62,8 +59,6 @@
         $('#chat-body').html($('#chat-body').html() + data + '\n');
     });
 
-<<<<<<< HEAD
-=======
 
     // function usenickname(){
     //     var usebutton= $('#').val();
@@ -73,7 +68,6 @@
     //
     //     }
 
->>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
@@ -86,11 +80,7 @@
         }
     });
 
-<<<<<<< HEAD
-    $('#mytext').val(function (index, item) {
-        //return "";
-    });
-=======
+
     <!--대화명 사용_code 변경예정-->
     //var socket.io();
 
@@ -109,7 +99,6 @@
     // function usename('onlineid_name'){
     //     var
     // }
->>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
 
 </script>
 

@@ -9,8 +9,7 @@ router.get('/', function (req, res, next) {//가입페이지 이동
 
 router.post('/', function (req, res, next) {
 
-<<<<<<< HEAD
-=======
+
     var updatenamesql = 'select name from user where id=? and pw=?';
     var updatebirthdaysql = 'select birthday date from user where id=? and pw=?';
     var updatephonenumbsql = 'select  phonenumber from user where id=? and pw=?';
@@ -59,6 +58,5 @@ router.post('/', function (req, res, next) {
 
 
     //connection.end();
->>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
 });
 module.exports = router;
