@@ -15,8 +15,9 @@
 <h1>WAP General chat</h1>
 <form>
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
-    <p> <label>Choose Online_id: <br/></label>
-        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" onclick=""javascript:radio_check(usenickname) checked>
+    <p><label>Choose Online_id: <br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" onclick=""
+                              javascript:radio_check(usenickname) checked>
         Using name:<input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
     </p>
     <label>Type what you want to say: </label>
@@ -50,20 +51,19 @@
     socket.on('chatRes', function (data) {
         console.log(data);
         //nickname을 사용해서 나타내줄건지 아니면 name을 사용할건지_표현
-        if($('#onlineid_nick').val()==checked){
+        if ($('#onlineid_nick').val() == checked) {
             /*var onlinenidk=$('#onlineid_nick').val()*/
 
-            $('#onlineid_nick').html()+':'+$('#chat-body').html($('#chat-body').html() + data + '\n');
+            $('#onlineid_nick').html() + ':' + $('#chat-body').html($('#chat-body').html() + data + '\n');
 
-        }else {
+        } else {
             // var onlinename
             $('#onlineid_nick').val();
             $('#onlineid_name').val().html() + ':' + $('#chat-body').html($('#chat-body').html() + data + '\n');
         }
 
-       // $('#chat-body').html($('#chat-body').html() + data + '\n'); 원래 있던 것
+        //$('#chat-body').html($('#chat-body').html() + data + '\n'); //원래 있던 것
     });
-
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
@@ -143,6 +143,7 @@
         var MBDone = Math.round(((percent / 100.0) * selectedFile.size) / 1048576);
         $('#MB').html(MBDone);
     }
+
     /* <!--대화명 사용_code 변경예정-->
     function usenickname() {
 
