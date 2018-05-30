@@ -18,8 +18,8 @@
          style="border: 1px solid;width:50%;height: 300px;overflow:scroll;"></div>
     <!--닉네임 사용여부 기능-->
     <p><label>Choose Online_id: <br/></label>
-        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="" checked>
-        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="">
+        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" checked>
+        Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
     </p>
     <label>Type what you want to say: </label>
     <input type="text" id="mytext" placeholder="type anything">
@@ -32,13 +32,21 @@
     <input type="button" id="deletingButton" value="Delete">
     <input type="button" id="exportingButton" value="Export"><br>
 </form>
+
+<div id="UploadBox">
+        <span id="uploadArea">
+        <label for="fileBox">Choose A File : </label><input type="file" id="fileBox"><br>
+        <label for="nameBox">Name : </label><input type="text" id="nameBox"><br>
+        <button type="button" id="uploadButton">Upload</button><br>
+    </span>
+</div>
+
+
+
 <script src="/js/bootstrap.min.js"></script>
 </body>
 <script>
-<<<<<<< HEAD
     var socket = io.connect("http://localhost:5000");
-=======
->>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
     var arr = [];
     var aaa = '<input type="checkbox" id="checkBox" onclick="chk()">';
 
@@ -47,70 +55,40 @@
     }
 
     var socket = io.connect("http://localhost:4000");
-
     var roomId = 2;
     socket.emit('join:room', {roomId: roomId});
 
     function clk() {
         var message = $('#mytext').val();
-        socket.emit('chatReqC', {msg: message});
+        socket.emit('chatReqC', {
+            msg: message
+
+        });
     }
 
     socket.on('chatRes', function (data) {
         console.log(data);
         //arr.push(f(data));
         $('#chat-body').html($('#chat-body').html() + data + '\n');
+
     });
-
-<<<<<<< HEAD
-=======
-
-    // function usenickname(){
-    //     var usebutton= $('#').val();
-    //     var printnick = $('#onlineid_nick').val();
-    //     if()
-    //     {
-    //
-    //     }
-
->>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
+  }
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
         if (key.keyCode == 13 && message != null) {
             socket.emit('chatReqC', {
                 msg: message
+
             });
             $('#mytext').val(null);
             $('#mytext').focus();
         }
     });
 
-<<<<<<< HEAD
     $('#mytext').val(function (index, item) {
         //return "";
     });
-=======
-    <!--대화명 사용_code 변경예정-->
-    //var socket.io();
-
-    // function usenickname(){
-    //     var usebutton= $('#').val();
-    //     var printnick = $('#onlineid_nick').val();
-    //     if()
-    //     {
-    //
-    //     }
-
-    // function usenickname('onlineid_nick'){
-    //     var
-    // }
-    //
-    // function usename('onlineid_name'){
-    //     var
-    // }
->>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
-
 </script>
 
 </html>
