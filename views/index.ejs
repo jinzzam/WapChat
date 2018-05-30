@@ -9,16 +9,16 @@
 
 </head>
 <body>
-<div class="jumbotron">
+<div class="container">
 <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-</div>
+
 <% if (user_id != undefined){ %>
 ID is <%= user_id %><br>
 <% }else{ %>
 로그인 해주세요.<br><br>
 <% } %>
-<div class="btn-group btn-group">
+<div class="btn-group btn-group-lg">
     <input type="button" class="btn btn-info btn-lg " id="gochat" name="gochat" value="Let's Chat"
            onclick="location.href='/chat'">
     <input type="button" class="btn btn-info btn-lg " id="goconference" name="conference chat" value="Conference"
@@ -32,6 +32,7 @@ ID is <%= user_id %><br>
     <input type="button" class="btn btn-info btn-lg" id="gologin" name="gologin" value="Logout"
            onclick="location.href='/logout'">
     <% } %>
+</div>
 </div>
 <script src="/js/bootstrap.min.js"></script>
 </body>
