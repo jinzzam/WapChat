@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+
+    <title><%= title %></title>
     <meta charset="UTF-8">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <title>Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/kfonts2.css" rel="stylesheet">
 
 </head>
 <body>
-   <!--db에서 데이터 가져오기-->
-<br>
-    <h2>modify user information</h2>
+    <form method="'post" name="modifymembership">
+        이름 : <input type="text" id="username" name="username"><br>
+        생년월일 : <input type="date" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6"><br>
+        전화번호 : <input type="text" id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11"><br>
+        아이디 : <input type="text" id="user_id" name="user_id"><br>
+        비밀번호 : <input type="password" id="user_pw" name="user_pw"><br>
+        비밀번호 확인 : <input type="password" id="verify_pw" name="verify_pw"><br>
+        닉네임 입력 : <input type="text" id="user_nick" name="user_nickname" placeholder="변경하고 싶은 닉네임을 입력해주세요"
+    </form>
+
 
 
 </body>

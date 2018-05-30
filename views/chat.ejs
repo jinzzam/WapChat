@@ -13,26 +13,32 @@
 </head>
 <body>
 <h1>WAP General chat</h1>
-<textarea id="chat-body" readonly rows="20px"></textarea><br>
+    <textarea id="chat-body" readonly rows="20px"></textarea><br>
+<<<<<<< HEAD
+    <p> <label>Choose Online_id: <br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" onclick="javascript:radio_check(this.value)" checked="checked">
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="usenamesql"onclick="javascript:radio_check(this.value)">
+=======
 
-<!--닉네임 사용여부 기능-->
-<p><label>Choose Online_id: <br/></label>
-    Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" onclick=""
-                          javascript:radio_check(usenickname) checked>
-    Using name:<input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
-</p>
-<label>Type what you want to say: </label>
-<input type="text" id="mytext" placeholder="type anything">
-<input type="button" value="chat" onclick="clk()"><br>
+    <!--닉네임 사용여부 기능-->
+    <p><label>Choose Online_id: <br/></label>
+        Using nickname:<input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" onclick=""
+                              javascript:radio_check(usenickname) checked>
+        Using name:<input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
+>>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
+    </p>
+    <label>Type what you want to say: </label>
+    <input type="text" id="mytext" placeholder="type anything">
+    <input type="button" value="chat" onclick="clk()"><br>
 
 
-<div id="UploadBox">
+    <div id="UploadBox">
         <span id="uploadArea">
         <label for="fileBox">Choose A File : </label><input type="file" id="fileBox"><br>
         <label for="nameBox">Name : </label><input type="text" id="nameBox"><br>
         <button type="button" id="uploadButton">Upload</button><br>
     </span>
-</div>
+    </div>
 
 <script src="/js/bootstrap.min.js"></script>
 </body>
@@ -54,10 +60,22 @@
     socket.on('chatRes', function (data) {
         console.log(data);
         //nickname을 사용해서 나타내줄건지 아니면 name을 사용할건지_표현
+<<<<<<< HEAD
+        if($('#onlineid_nick').val()==){
+            /*var onlinenidk=$('#onlineid_nick').val()*/
+
+            $('#chat-body').html($('#chat-body').html() + data + '\n');
+
+        }else
+        {
+            var onlinename
+            $('#chat-body').html($('#chat-body').html() + data + '\n');
+=======
         if (data.user_id != undefined) {
             $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + data.msg + '\n');
         } else {
             $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + data.msg + '\n');
+>>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
         }
     });
 
@@ -124,7 +142,6 @@
     socket.on('MoreData', function (data) {
         console.log(data.Percent);
         UpdateBar(data.Percent);
-        ImageView();
         var Place = data.Place * 524288;
         console.log(Place);
         var NewFile = "";
@@ -142,22 +159,8 @@
         var MBDone = Math.round(((percent / 100.0) * selectedFile.size) / 1048576);
         $('#MB').html(MBDone);
     }
-
-    function ImageView() {
-        var fileName = $('#nameBox').val();
-        var str = "<img src=/Users/jinzzam/Desktop/WebStorm workspace/WapChat/Video/" + fileName + ">" // 이미지 태그 삽입
-        socket.emit('viewImg', {str: str});
-    }
-
-    socket.on('imgRes', function (data) {
-        console.log(data);
-        //nickname을 사용해서 나타내줄건지 아니면 name을 사용할건지_표현
-        if (data.user_id != undefined) {
-            $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + innerHTML(data.str) + '\n');
-        } else {
-            $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + data.str + '\n');
-        }
-    });
+<<<<<<< HEAD
+=======
 
     /* <!--대화명 사용_code 변경예정-->
     function usenickname() {
@@ -169,5 +172,6 @@
     var printnick = $('#onlineid_nick').val();
     */
 
+>>>>>>> 62da1bf91edb4c1fb69e1e565971c0bd1036da2e
 </script>
 </html>

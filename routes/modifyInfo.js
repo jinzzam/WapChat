@@ -3,12 +3,12 @@ var connection = require('../public/javascripts/dbconnection');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('modifyInfo');
+router.get('/', function (req, res, next) {//가입페이지 이동
+    res.render('modifyInfo', {title: 'Modify User Information'})
 });
 
 router.post('/', function (req, res, next) {
-    var selectpwsql = 'select password from user where id=?';
+
 
     var updatenamesql = 'select name from user where id=? and pw=?';
     var updatebirthdaysql = 'select birthday date from user where id=? and pw=?';
