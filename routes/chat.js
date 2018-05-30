@@ -12,8 +12,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req, res) {
-    var usenamesql = 'select name from user where id=?';
-    var usenicksql = 'select nickname from user where id=?';
     res.render('chat');
 });
 module.exports = router;
