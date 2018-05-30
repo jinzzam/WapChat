@@ -14,7 +14,7 @@
 <body>
 <h1>WAP Conference Chat</h1>
 <form>
-    <div id="chat-body" rows="20px" itemtype="checkbox"
+    <div id="chat-body" rows="20px"
          style="border: 1px solid;width:50%;height: 300px;overflow:scroll;"></div>
     <!--닉네임 사용여부 기능-->
     <p><label>Choose Online_id: <br/></label>
@@ -25,7 +25,7 @@
     <input type="text" id="mytext" placeholder="type anything">
     <input type="button" value="chat" onclick="clk()">
     <br>
-    <div id="conference-table" readonly rows="20px" itemtype="checkbox" style="border: 1px solid;width:50%;height: 300px;overflow:scroll"></div><br>
+    <div id="conference-table" readonly rows="20px" style="border: 1px solid;width:50%;height: 300px;overflow:scroll"></div><br>
     <input type="button" id="deletingButton" value="Delete">
     <input type="button" id="exportingButton" value="Export"><br>
 </form>
@@ -37,14 +37,14 @@
     var arr = [];
     var moveArr=[];
     var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst(arr[arr.length-1])">';
-    var moveToTextFile = '<input type="checkbox" id="textCheckbox" onclick="chk()">';
+    var moveToTextFile = '<input type="checkbox" id="textCheckbox" onclick="">';
 
     function first(data) {
         return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + moveToConferenceTalbe + '<br>';
     }
-
-
-
+    function end(data){
+        return '<b>'+data+'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+moveToTextFile+'<br>';
+    }
 
     var socket = io.connect("http://localhost:4000");
 
@@ -70,13 +70,12 @@
         if(CheckBox.checked==true){
             //conference-table에 데이터 옮기기
             socket.emit('conferenceChat',{cmsg:data});
-            return '<b>'+data+'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+moveToTextFile+'<br>';
         }
     }
 
     socket.on('conferenceRes',function(data){
         console.log(data);
-        moveArr.push(chkfirst(data));
+        moveArr.push(end(data));//무한루프지점
         $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+'\n');
     });
 
