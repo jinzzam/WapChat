@@ -37,17 +37,27 @@
     var socket = io.connect("http://localhost:5000");
 
     var arr = [];
-    var aaa = '<input type="checkbox" id="checkBox" onclick="chk()">';
+    var moveArr=[];
+    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chk(arr[arr.length-1])">';
+    var moveToTextFile = '<input type="checkbox" id="textCheckbox" onclick="chk()">';
 
     function f(data) {
-        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + aaa + '<br>';
+        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + moveToConferenceTalbe + '<br>';
     }
-
+    //클릭하면 데이터 옮기는 함수
     function chk(data){
-        if('checkBox'==checked){
+        //Get the checkBox
+        var CheckBox=document.getElementById("checkBox");
+        //Get the output text
+        var checkedText=document.getElementById("mytext");
+
+        //If the checkbox is checked, display the output text
+        if(CheckBox.checked==true){
             //conference-table에 데이터 옮기기
+            socket.emit('conferenceChat',{cmsg:data});
         }
     }
+
 
     var socket = io.connect("http://localhost:4000");
 
@@ -63,6 +73,12 @@
         console.log(data);
         arr.push(f(data));
         $('#chat-body').html($('#chat-body').html() + arr[arr.length-1] + '\n');
+    });
+
+    socket.on('conferenceRes',function(data){
+        console.log(data);
+        moveArr.push(chk(data));
+        $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+'\n');
     });
 
     $('#mytext').keydown(function (key) {
