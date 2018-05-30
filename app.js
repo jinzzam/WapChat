@@ -105,6 +105,10 @@ io.sockets.on('connection', function (socket) {
         io.sockets.in('room2').emit('chatRes', data.msg);// 요청
     });
 
+    socket.on('viewImg', function (data) {
+        io.sockets.in('room1').emit('imgRes', data.str);
+    })
+
 
     //파일 서버로 받아와서 서버에 저장
     socket.on('Start', function (data) {
