@@ -3,9 +3,6 @@ var connection = require('../public/javascripts/dbconnection');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {//가입페이지 이동
-    res.render('modifyInfo', {title: 'Modify User Information'})
-});
 
 router.post('/', function (req, res, next) {
     var updatenamesql = 'select name from user where id=? and pw=?';
@@ -29,5 +26,14 @@ router.post('/', function (req, res, next) {
     */
 
     //connection.end();
+router.get('/', function (req, res, next) {
+    if (req.session.user_id != undefined) {
+        res.render('modifyInfo', {title: 'Modify User Information'})
+    } else {
+        res.redirect('/login');
+    }
 });
+router.post('/', function (req, res) {
+    res.render('modifyInfo');
+})
 module.exports = router;

@@ -11,15 +11,47 @@
 
 </head>
 <body>
-    <form method="'post" name="modifymembership">
-        이름 : <input type="text" id="username" name="username"><br>
-        생년월일 : <input type="date" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6"><br>
-        전화번호 : <input type="text" id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11"><br>
-        아이디 : <input type="text" id="user_id" name="user_id"><br>
-        비밀번호 : <input type="password" id="user_pw" name="user_pw"><br>
-        비밀번호 확인 : <input type="password" id="verify_pw" name="verify_pw"><br>
-        닉네임 입력 : <input type="text" id="user_nick" name="user_nickname" placeholder="변경하고 싶은 닉네임을 입력해주세요"
+<div class="container" style="max-width:600px;padding:40px 20px;background:#ebeff2">
+    <h1>회원정보수정</h1>
+    <form method="'post" class-"form-horizontal" name="modifymembership">
+    <div class="form-group form-group-lg">
+        이름 : <input type="text" class="form-control" id="username" name="username" required="" autofocus="" value="">
+    </div>
+    <div class="form-group form-group-lg">
+        생년월일 : <input type="date" class="form-control" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6">
+    </div>
+    <div class="form-group form-group-lg">
+        전화번호 : <input type="text" class="form-control" id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11">
+    </div>
+    <div class="form-group form-group-lg">
+        아이디 : <input type="text" class="form-control" id="user_id" name="user_id">
+    </div>
+    <div class="form-group form-group-lg">
+        비밀번호 : <input type="password" class="form-control" id="user_pw" name="user_pw">
+    </div>
+    <div class="form-group form-group-lg">
+        비밀번호 확인 : <input type="password" class="form-control" id="verify_pw" name="verify_pw">
+    </div>
+    <div class="form-group form-group-lg">
+        닉네임 입력 : <input type="text" class="form-control" id="user_nick" name="user_nickname" placeholder="변경하고 싶은 닉네임을 입력해주세요">
+    </div>
+
+    <input type="button" class="btn btn-control" value="회원정보 수정 완료" onclick="undateinfo()">
+
+
     </form>
+</div>
+    <script>
+
+
+        /*onclick 이벤트
+        function updateinfo(){
+
+        }
+        */
+
+
+    </script>
 
 
 
