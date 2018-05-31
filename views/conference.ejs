@@ -69,7 +69,7 @@
         });
     }
 
-    socket.on('chatRes', function (data) {
+    socket.on('chatRes', function (data) { //72-81줄 수정 부탁드립니다.
         console.log(data);
         //arr.push(f(data));
         $('#chat-body').html($('#chat-body').html() + data + '\n');
