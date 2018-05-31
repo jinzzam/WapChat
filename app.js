@@ -7,8 +7,6 @@ var logger = require('morgan');
 var fs = require('fs');
 var session = require('express-session');
 
-//var session =require('C:/Users/kunk6/Desktop/WapChat/node_modules/express-session');
-
 var io = require('socket.io').listen(4000);
 
 

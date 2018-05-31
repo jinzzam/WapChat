@@ -21,13 +21,12 @@ router.post('/', function (req, res, next) {
 
     if (password == verifypw) {
         //회원가입 성공
-        var insertsql = "insert into user values('\' + name + '\', '\' + birthday + '\', '\' + number + '\', '\' + id + '\', '\' + password + '\','\'+nickname+'\')";
+        var insertsql = "insert into user(name, birthday,number,id,password,nickname) values('\' + name + '\', '\' + birthday + '\', '\' + number + '\', '\' + id + '\', '\' + password + '\','\'+nickname+'\')";
         connection.query(insertsql, function (err, rows, fields) {
             if (!err)
                 console.log('The solution is ', rows);
             else
                 console.log('Error while performing Query.', err);
-
         });
         connection.end();
         res.redirect('/');
