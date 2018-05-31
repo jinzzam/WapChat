@@ -20,16 +20,18 @@
     <!--닉네임 사용여부 기능-->
     <p>
         <label>Choose Online_id: <br/></label>
-        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" checked>
+        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql">
         Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
     </p>
     <div class="form-group">
     <label>Type what you want to say: </label>
-    <input type="text" class="form-control" id="mytext" placeholder="type anything">
+    <input type="text" class="form-control" id="mytext" placeholder="type anything" required="" autofocus="">
     <input type="button" class="btn" value="chat" onclick="clk()">
     </div>
     <br>
-    <div id="conference-table" readonly rows="20px" style="border: 1px solid;width:50%;height: 300px;overflow:scroll"></div><br>
+    <div id="conference-table" readonly rows="20px" style="border: 1px solid;width:50%;height: 300px;overflow:scroll">
+
+    </div><br>
     <input type="button" class="btn" id="deletingButton" value="Delete">
     <input type="button" class="btn" id="exportingButton" value="Export"><br>
 </form>
@@ -39,7 +41,7 @@
         <label for="fileBox">Choose A File : </label>
             <input type="file"  id="fileBox"><br>
         <label for="nameBox">Name : </label>
-            <input type="text" class="form-control" id="nameBox">
+            <input type="text" class="form-control" id="nameBox" required="">
         <button type="button" class="btn" id="uploadButton">Upload</button><br>
     </span>
 </div>
