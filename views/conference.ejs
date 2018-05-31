@@ -44,10 +44,7 @@
 </body>
 <script>
     var socket = io.connect("http://localhost:5000");
-<<<<<<< HEAD
-=======
 
->>>>>>> 761eb0481e61ef503a987a03e80af3c52a740d3e
     var arr = [];
     var moveArr=[];
     var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst(arr[arr.length-1])">';
@@ -57,7 +54,7 @@
         return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + moveToConferenceTalbe + '<br>';
     }
     function end(data){
-        return '<b>'+data+'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+moveToTextFile+'<br>';
+        return '<b>'+data+'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>';
     }
 
     var socket = io.connect("http://localhost:4000");
@@ -74,13 +71,11 @@
 
     socket.on('chatRes', function (data) {
         console.log(data);
-<<<<<<< HEAD
         //arr.push(f(data));
         $('#chat-body').html($('#chat-body').html() + data + '\n');
 
     });
   }
-=======
         arr.push(first(data));
         $('#chat-body').html($('#chat-body').html() + arr[arr.length-1] + '\n');
     });
@@ -101,7 +96,6 @@
         moveArr.push(end(data));//무한루프지점
         $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+'\n');
     });
->>>>>>> 761eb0481e61ef503a987a03e80af3c52a740d3e
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
@@ -115,12 +109,9 @@
         }
     });
 
-<<<<<<< HEAD
     $('#mytext').val(function (index, item) {
         //return "";
     });
-=======
->>>>>>> 761eb0481e61ef503a987a03e80af3c52a740d3e
 </script>
 
 </html>
