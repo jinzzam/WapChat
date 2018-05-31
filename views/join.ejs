@@ -16,12 +16,12 @@
 <p>Welcome to <%= title %></p>
 
     이름 : <input type="text" class=form-control id="name" name="name" required="" autofocus=""><br>
-    생년월일 : <input type="date" class=form-control id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6"><br>
-    전화번호 : <input type="text" class=form-control id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11"><br>
-    아이디 : <input type="text" class=form-control id="user_id" name="user_id"><br>
-    비밀번호 : <input type="password" class=form-control id="user_pw" name="user_pw"><br>
-    비밀번호 확인 : <input type="password" class=form-control id="verify_pw" name="verify_pw"><br>
-    닉네임 입력 : <input type="text" class=form-control id="user_nick" name="user_nickname" placeholder="닉네임 설정은 필수사항이 아닙니다."><br>
+    생년월일 : <input type="date" class=form-control id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6" required=""><br>
+    전화번호 : <input type="text" class=form-control id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11" required=""><br>
+    아이디 : <input type="text" class=form-control id="user_id" name="user_id" required=""><br>
+    비밀번호 : <input type="password" class=form-control id="user_pw" name="user_pw" required=""><br>
+    비밀번호 확인 : <input type="password" class=form-control id="verify_pw" name="verify_pw" required=""><br>
+    닉네임 입력 : <input type="text" class=form-control id="user_nick" name="user_nickname" placeholder="닉네임 설정은 필수사항이 아닙니다." required=""><br>
     <input type="submit" class="btn btn-control" value="회원가입 하기">
 
 </form>
