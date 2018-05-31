@@ -8,11 +8,6 @@ router.get('/', function (req, res, next) {//가입페이지 이동
 });
 
 router.post('/', function (req, res, next) {
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 761eb0481e61ef503a987a03e80af3c52a740d3e
     var updatenamesql = 'select name from user where id=? and pw=?';
     var updatebirthdaysql = 'select birthday date from user where id=? and pw=?';
     var updatephonenumbsql = 'select  phonenumber from user where id=? and pw=?';
