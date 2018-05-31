@@ -45,16 +45,15 @@
 <script>
     var socket = io.connect("http://localhost:4000");
 
+
     var arr = [];
     var moveArr=[];
-    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst(arr[arr.length-1])">';
+    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst()">';
+    var deleteCheck= '<input type="checkbox" id="deleteBox" onclick="chkdelete()">';
     var moveToTextFile = '<input type="checkbox" id="textCheckbox" onclick="">';
 
     function first(data) {
-        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + moveToConferenceTalbe + '<br>';
-    }
-    function end(data){
-        return '<b>'+data+'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>';
+        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     }
 
     var roomId = 2;
@@ -62,36 +61,37 @@
 
     function clk() {
         var message = $('#mytext').val();
-        socket.emit('chatReqC', {
-            msg: message
-
-        });
+        socket.emit('chatReqC', {msg: message});
     }
-
-    socket.on('chatRes', function (data) { //72-81줄 수정 부탁드립니다.
-        console.log(data);
-        //arr.push(f(data));
-        //$('#chat-body').html($('#chat-body').html() + data + '\n');
-
-        arr.push(first(data));
-        $('#chat-body').html($('#chat-body').html() + arr[arr.length-1] + '\n');
-    });
-
     //클릭하면 데이터 옮기는 함수
-    function chkfirst(data){
+    function chkfirst(){
         //Get the checkBox
+        var conferenceContent=arr[arr.length-1];
         var CheckBox=document.getElementById("checkBox");
-    //If the checkbox is checked, display the output text
-        if(CheckBox.checked==true){
+        //If the checkbox is checked, display the output text
+        if(CheckBox.checked==true)
             //conference-table에 데이터 옮기기
-            socket.emit('conferenceChat',{cmsg:data});
-        }
+            socket.emit('conferenceChat',{cmsg:conferenceContent});
     }
+    function chkdelete(){
+    var conferenceMessage=moveArr[moveArr.length-1];
+    var deleteBox=document.getElementById("deleteBox");
+    var linedMessage=conferenceMessage.fontcolor("red");
+    var makeEmpty=conferenceMessage.replace(conferenceMessage,linedMessage);
+    if(deleteBox.checked==true)
+        console.log(makeEmpty);//remove 기능 만들기
+    }
+
+    socket.on('chatRes', function (data) {
+        console.log(data);
+        arr.push(first(data));
+        $('#chat-body').html($('#chat-body').html() + arr[arr.length-1]+moveToConferenceTalbe + '<br>');
+    });
 
     socket.on('conferenceRes',function(data){
         console.log(data);
-        moveArr.push(end(data));//무한루프지점
-        $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+'\n');
+        moveArr.push(data);
+        $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+deleteCheck+'<br>');
     });
 
     $('#mytext').keydown(function (key) {

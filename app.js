@@ -107,6 +107,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('viewImg', function (data) {
         io.sockets.in('room1').emit('imgRes', data.str);
     });
+
     socket.on('conferenceChat',function(data){
         console.log(data);
         io.sockets.in('room2').emit('conferenceRes',data.cmsg);
