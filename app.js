@@ -11,6 +11,7 @@ var session = require('express-session');
 
 var io = require('socket.io').listen(4000);
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var chatRouter = require('./routes/chat');
