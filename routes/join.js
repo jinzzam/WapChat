@@ -4,7 +4,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {//가입페이지 이동
+    if(req.session.user_id==undefined)
     res.render('join', {title: 'Join'});
+    else
+        res.redirect('/');
 });
 
 router.post('/', function (req, res, next) {
@@ -18,8 +21,7 @@ router.post('/', function (req, res, next) {
 
     if (password == verifypw) {
         //회원가입 성공
-        var insertsql = "insert into user values(\'' + name + '\', \'' + birthday + '\', \'' + number + '\', \'' + id + '\', \'' + password + '\',\''+nickname+'\')";
-
+        var insertsql = "insert into user values('\' + name + '\', '\' + birthday + '\', '\' + number + '\', '\' + id + '\', '\' + password + '\','\'+nickname+'\')";
         connection.query(insertsql, function (err, rows, fields) {
             if (!err)
                 console.log('The solution is ', rows);
