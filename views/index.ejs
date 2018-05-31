@@ -9,10 +9,10 @@
 
 </head>
 <body>
-<div class="jumbotron">
+<div class="container">
 <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-</div>
+
 <% if (user_id != undefined){ %>
 ID는 <%= user_id %>입니다.<br><br>
 <% }else{ %>
@@ -34,6 +34,7 @@ ID는 <%= user_id %>입니다.<br><br>
     <input type="button" class="btn btn-info btn-lg" id="gologin" name="gologin" value="로그아웃"
            onclick="location.href='/logout'">
     <% } %>
+</div>
 </div>
 <script src="/js/bootstrap.min.js"></script>
 </body>
