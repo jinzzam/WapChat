@@ -7,7 +7,7 @@ var router = express.Router();
 router.post('/', function (req, res, next) {
     var updatenamesql = 'select name from user where id=? and pw=?';
     var updatebirthdaysql = 'select birthday date from user where id=? and pw=?';
-    var updatephonenumbsql = 'select  phonenumber from user where id=? and pw=?';
+    var updatenumbsql = 'select  number from user where id=? and pw=?';
     var updateidsql = 'select id from user where id=? and pw=?';
     var updatepwsql = 'select password from user where id=? and pw=?';
     var updatenicksql = 'select nickname from user where id=? and pw=?';
@@ -46,12 +46,19 @@ router.post('/', function (req, res) {
     if (password == verifypw) {
         //정보수정
         var updatename = "update user set values(name=?) where id=?";
-        var updatenumber ="update user set values(phonenumber=?) where id=?";
+        var updatenumber ="update user set values(number=?) where id=?";
         var updateid="update user set values(id=?) where id=?";
         var updatepw="update user set values(password=?) where id=?";
         var updatebirthday="update user set values(birthday=?) where id=?";
-        var updatenicknaem="update user set values(nickname=?) where id=?";
+        var updatenickname="update user set values(nickname=?) where id=?";
         connection.query(updatename, function (err, rows, fields) {
+            if (!err)
+                console.log('The solution is ', rows);
+            else
+                console.log('Error while performing Query.', err);
+
+        });
+        connection.query(updatenumber, function (err, rows, fields) {
             if (!err)
                 console.log('The solution is ', rows);
             else
@@ -79,7 +86,7 @@ router.post('/', function (req, res) {
                 console.log('Error while performing Query.', err);
 
         });
-        connection.query(updatenicknaem, function (err, rows, fields) {
+        connection.query(updatenickname, function (err, rows, fields) {
             if (!err)
                 console.log('The solution is ', rows);
             else
