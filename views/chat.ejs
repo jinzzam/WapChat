@@ -46,7 +46,7 @@
     var roomId = 1;
     socket.emit('join:room', {roomId: roomId});
 
-    
+
     function clk() {
         var message = $('#mytext').val();
         socket.emit('chatReqG', {
