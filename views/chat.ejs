@@ -16,25 +16,26 @@
 <div class="form-group">
     <textarea id="chat-body" class="form-control" readonly rows="20px"></textarea>
 </div>
-    <!--닉네임 사용여부 기능-->
-    <p><label>Choose Online_id: <br/></label>
-        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" checked>
-        Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
-    </p>
-    <label>Type what you want to say: </label>
-    <input type="text" class="form-control" id="mytext" placeholder="type anything">
-    <input type="button" class="form-control" value="chat" onclick="clk()"><br>
+<!--닉네임 사용여부 기능-->
+<p><label>Choose Online_id: <br/></label>
+    Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" checked>
+    Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
+</p>
+<label>Type what you want to say: </label>
+<input type="text" class="form-control" id="mytext" placeholder="type anything">
+<input type="button" class="form-control" value="chat" onclick="clk()"><br>
 
 
-    <div id="UploadBox">
-        <span id="uploadArea">
-        <label for="fileBox">Choose A File : </label>
-            <input type="file" id="fileBox"><br>
-        <label for="nameBox">Name : </label>
-            <input type="text" class="form-control" id="nameBox"><br>
-        <button type="button" class="form-control" id="uploadButton">Upload</button><br>
-    </span>
-    </div>
+<div id="UploadBox">
+    <span id="uploadArea"></span>
+    <label for="fileBox">Choose A File : </label>
+    <input type="file" id="fileBox"><br>
+    <label for="nameBox">Name : </label>
+    <input type="text" class="form-control" id="nameBox"><br>
+    <button type="button" class="form-control" id="uploadButton">Upload</button>
+    <br>
+
+</div>
 
 <script src="/js/bootstrap.min.js"></script>
 </body>
@@ -106,7 +107,7 @@
             console.log(selectedFile.type);
             Name = $('#nameBox').val();
             var Content = "<span id='NameArea'>Uploading " + selectedFile.name + " as " + Name + "</span>";
-            Content += "<span id='Uploaded'> - <span id='MB'>0</span>/" + (selectedFile.size / 1048576).toFixed(3) + "MB</span>";
+            Content += "<span id='Uploaded'> - <span id='MB'>0</span>/" + (selectedFile.size / 1048576).toFixed(3) + "MB</span><br>";
             $('#uploadArea').html(Content);
             fileReader.onload = function (event) {
                 if (!event) {
