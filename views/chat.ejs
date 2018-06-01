@@ -105,7 +105,7 @@
         if ($('#fileBox').value != "") {
             fileReader = new FileReader();
             console.log(selectedFile.type);
-            Name = $('#nameBox').val();
+            Name = $('#nameBox').val(); //nameBox 값 바꾸면 그 값으로 저장 가능함
             var Content = "<span id='NameArea'>Uploading " + selectedFile.name + " as " + Name + "</span>";
             Content += "<span id='Uploaded'> - <span id='MB'>0</span>/" + (selectedFile.size / 1048576).toFixed(3) + "MB</span><br>";
             $('#uploadArea').html(Content);
