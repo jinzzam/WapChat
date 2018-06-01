@@ -107,11 +107,11 @@ io.sockets.on('connection', function (socket) {
         connection.query(selectnamesql, data.user_id, function (err, rows, fields) {
             console.log(rows[0].name);
             if (data.checked_id) {
-                io.sockets.in('room2').emit('conferenceRes', data);
+                io.sockets.in('room2').emit('chatRes', data);
             } else {
                 data.user_id = undefined;
                 data.user_name = rows[0].name;
-                io.sockets.in('room2').emit('conferenceRes', data);
+                io.sockets.in('room2').emit('chatRes', data);
             }
         });
     });

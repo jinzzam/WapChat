@@ -14,8 +14,7 @@
 <body>
 <h1>WAP Conference Chat</h1>
 <form>
-    <div class="form-control" id="chat-body" rows="20px"
-         style="border: 1px solid;width:50%;height: 300px;overflow:scroll;">
+    <div id="chat-body" rows="20px" style="border: 1px solid;width:50%;height: 300px;overflow:scroll;">
     </div>
     <!--닉네임 사용여부 기능-->
     <p>
@@ -24,22 +23,23 @@
         Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
     </p>
     <div class="form-group">
-    <label>Type what you want to say: </label>
-    <input type="text" class="form-control" id="mytext" placeholder="type anything" required="" autofocus="">
-    <input type="button" class="btn" value="chat" onclick="clk()">
+        <label>Type what you want to say: </label>
+        <input type="text" class="form-control" id="mytext" placeholder="type anything" required="" autofocus="">
+        <input type="button" class="btn" value="chat" onclick="clk()">
     </div>
     <br>
     <div id="conference-table" readonly rows="20px" style="border: 1px solid;width:50%;height: 300px;overflow:scroll">
 
-    </div><br>
+    </div>
+    <br>
     <input type="button" class="btn" id="deletingButton" value="Delete">
     <input type="button" class="btn" id="exportingButton" value="Export"><br>
 </form>
 
-<div class="container" id="UploadBox">
+<div class="form-group" id="UploadBox">
         <span id="uploadArea">
         <label for="fileBox">Choose A File : </label>
-            <input type="file"  id="fileBox"><br>
+            <input type="file" id="fileBox"><br>
         <label for="nameBox">Name : </label>
             <input type="text" class="form-control" id="nameBox" required="">
         <button type="button" class="btn" id="uploadButton">Upload</button><br>
@@ -47,21 +47,21 @@
 </div>
 
 
-
 <script src="/js/bootstrap.min.js"></script>
 </body>
 <script>
     var socket = io.connect("http://localhost:4000");
 
-
+    var moveToConferenceTableSize = 0;
     var arr = [];
-    var moveArr=[];
-    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst()" value="1">';
-    var candidateCheck= '<input type="checkbox" id="deleteBox" onclick="chkdelete()">';
+    var moveArr = [];
 
+    function moveToConferenceTableMaker(temp) {
+        return '<input type="checkbox" id="checkBox' + temp + '" onclick="chkfirst(' + temp + ')">';
+    }
 
     function first(data) {
-        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + moveToConferenceTableMaker(moveToConferenceTableSize++);
     }
 
     var roomId = 2;
@@ -75,13 +75,14 @@
             checked_id: $('#onlineid_nick').is(':checked')
         });
     }
+
     //줄바꿈이 제대로 되지 않음
-    socket.on('conferenceRes', function (data) {
-        console.log(data);
+    socket.on('chatRes', function (data) {
+        arr.push(first(data.msg));
         if (data.user_id != undefined) {
-            $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + data.msg + '\n');
+            $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + arr[arr.length - 1] + '<br>');
         } else {
-            $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + data.msg + '\n');
+            $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + arr[arr.length - 1] + '<br>');
         }
     });
     $('#mytext').keydown(function (key) {
@@ -96,45 +97,19 @@
             $('#mytext').focus();
         }
     });
-    //클릭하면 데이터 옮기는 함수
-    function chkfirst(){
-        //Get the checkBox
-        var conferenceContent=arr[arr.length-1];//수정해야해 배열2개( 1: 문자들, 2: 문자들과 동일한 체크박스 순서)-> 출력할 때
-        var CheckBox=document.getElementById("checkBox");
-        //If the checkbox is checked, display the output text
-        if(CheckBox.checked==true)
-            //conference-table에 데이터 옮기기
-            socket.emit('conferenceChat',{cmsg:conferenceContent});
+
+    function chkfirst(temp) {
+        var conferenceContent = arr[temp];
+        var CheckBox = document.getElementById("checkBox" + temp);
+        if (CheckBox.checked == true)
+            socket.emit('conferenceChat', {cmsg: conferenceContent});
     }
 
-    // function saveToArray{
-    //
-    // }
-
-    function chkdelete(){
-    var conferenceMessage=moveArr[moveArr.length-1];//수정해야해
-    var deleteBox=document.getElementById("deleteBox");
-    var linedMessage=conferenceMessage.fontcolor("red");
-    var makeEmpty=conferenceMessage.replace(conferenceMessage,linedMessage);
-    if(deleteBox.checked==true)
-        console.log(makeEmpty);//remove 기능 만들기
-    }
-
-    socket.on('chatRes', function (data) {
-        console.log(data);
-        arr.push(first(data));
-        // $('input:checkbox[name=candidateCheck]').forEach(function(){
-        //     checkArr.push($(this).);
-        // });//checkbox 배열 삽입
-        $('#chat-body').html($('#chat-body').html() + arr[arr.length-1]+moveToConferenceTalbe + '<br>');
-    });
-
-    socket.on('conferenceRes',function(data){
+    socket.on('conferenceRes', function (data) {
         console.log(data);
         moveArr.push(data);
-        $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+candidateCheck+'<br>');
+        $('#conference-table').html($('#conference-table').html() + data+'<br>');
     });
-
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
