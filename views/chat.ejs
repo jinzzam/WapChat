@@ -16,7 +16,7 @@
     <textarea id="chat-body" readonly rows="20px"></textarea><br>
     <!--닉네임 사용여부 기능-->
     <p><label>Choose Online_id: <br/></label>
-        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql" checked>
+        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicknamesql" checked>
         Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
     </p>
     <label>Type what you want to say: </label>
@@ -51,7 +51,6 @@
 
     socket.on('chatRes', function (data) {
         console.log(data);
-
         if (data.user_id != undefined) {
             $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + data.msg + '\n');
         } else {

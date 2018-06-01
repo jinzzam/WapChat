@@ -11,25 +11,38 @@
 
 </head>
 <body>
+
     <form method="'post" name="modifymembership">
-        이름 : <input type="text" id="username" name="username" value=""><br>
+        이름 : <input type="text" id="username" name="username" value='<%=user_name %>' ><br>
         생년월일 : <input type="date" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6"><br>
         전화번호 : <input type="text" id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11"><br>
-        아이디 : <input type="text" id="user_id" name="user_id"><br>
+        아이디 : <input type="text" id="user_id" name="user_id" value=""><br>
         비밀번호 : <input type="password" id="user_pw" name="user_pw"><br>
         비밀번호 확인 : <input type="password" id="verify_pw" name="verify_pw"><br>
         닉네임 입력 : <input type="text" id="user_nick" name="user_nickname" placeholder="변경하고 싶은 닉네임을 입력해주세요"><br>
 
         <input type="button" value="회원정보 수정 완료" onclick="undateinfo()">
-
-
     </form>
     <script>
+        var updatename = "update user set values(name=?) where id=?";
+        var updatephone ="update user set values(phonenumber=?) where id=?";
+        var updateid="update user set values(id=?) where id=?";
+        var updatepw="update user set values(password=?) where id=?";
+        var updatebirthday="update user set values(birthday=?) where id=?";
+        var updatenicknaem="update user set values(nickname=?) where id=?";
+
+        var user_name=req.body.user_name;
 
 
-        /*onclick 이벤트
+
+
+
+       // onclick 이벤트
+       /*
         function updateinfo(){
-
+            socket.emit('modifyInfoReqM',{
+                user_id: '
+            })
         }
         */
 
