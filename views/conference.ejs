@@ -108,7 +108,7 @@
     socket.on('conferenceRes', function (data) {
         console.log(data);
         moveArr.push(data);
-        $('#conference-table').html($('#conference-table').html() + data);
+        $('#conference-table').html($('#conference-table').html() + data+'<br>');
     });
 
     $('#mytext').keydown(function (key) {
