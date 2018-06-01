@@ -14,9 +14,8 @@
 <body>
 <h1>WAP Conference Chat</h1>
 <form>
-    <div class="form-control" id="chat-body" rows="20px"
-         style="border: 1px solid;width:50%;height: 300px;overflow:scroll;">
-    </div>
+    <div id="chat-body" rows="20px"  style="border: 1px solid;width:50%;height: 300px;overflow:scroll;">
+             </div>
     <!--닉네임 사용여부 기능-->
     <p>
         <label>Choose Online_id: <br/></label>
@@ -56,12 +55,20 @@
 
     var arr = [];
     var moveArr=[];
-    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst()" value="1">';
+    var boxArr=[];
+    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst()">';
     var candidateCheck= '<input type="checkbox" id="deleteBox" onclick="chkdelete()">';
 
 
     function first(data) {
-        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+moveToConferenceTalbe+'<br>';
+    }
+    function checkingbox(){
+        var count=0;
+        var box=document.getElementById("checkBox");
+        if(box==true){
+            boxArr.push(count++);
+            }
     }
 
     var roomId = 2;
@@ -76,8 +83,9 @@
         });
     }
     //줄바꿈이 제대로 되지 않음
-    socket.on('conferenceRes', function (data) {
+    socket.on('chatRes', function (data) {
         console.log(data);
+        arr.push(first(data));
         if (data.user_id != undefined) {
             $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + data.msg + '\n');
         } else {
@@ -99,7 +107,7 @@
     //클릭하면 데이터 옮기는 함수
     function chkfirst(){
         //Get the checkBox
-        var conferenceContent=arr[arr.length-1];//수정해야해 배열2개( 1: 문자들, 2: 문자들과 동일한 체크박스 순서)-> 출력할 때
+        var conferenceContent=arr[arr.length-1];
         var CheckBox=document.getElementById("checkBox");
         //If the checkbox is checked, display the output text
         if(CheckBox.checked==true)
@@ -107,32 +115,22 @@
             socket.emit('conferenceChat',{cmsg:conferenceContent});
     }
 
-    // function saveToArray{
-    //
-    // }
-
     function chkdelete(){
     var conferenceMessage=moveArr[moveArr.length-1];//수정해야해
     var deleteBox=document.getElementById("deleteBox");
-    var linedMessage=conferenceMessage.fontcolor("red");
-    var makeEmpty=conferenceMessage.replace(conferenceMessage,linedMessage);
-    if(deleteBox.checked==true)
-        console.log(makeEmpty);//remove 기능 만들기
+    // var linedMessage=conferenceMessage.fontcolor("red");
+    // var makeEmpty=conferenceMessage.replace(conferenceMessage,linedMessage);
+    if(deleteBox.checked==true){
+        // console.log(makeEmpty);//remove 기능 만들기
+        moveArr.pop();
+        console.log(moveArr[moveArr.length-1]);
+        }
     }
-
-    socket.on('chatRes', function (data) {
-        console.log(data);
-        arr.push(first(data));
-        // $('input:checkbox[name=candidateCheck]').forEach(function(){
-        //     checkArr.push($(this).);
-        // });//checkbox 배열 삽입
-        $('#chat-body').html($('#chat-body').html() + arr[arr.length-1]+moveToConferenceTalbe + '<br>');
-    });
 
     socket.on('conferenceRes',function(data){
         console.log(data);
         moveArr.push(data);
-        $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+candidateCheck+'<br>');
+        $('#conference-table').html($('#conference-table').html()+data.cmsg+candidateCheck+'<br>');
     });
 
 
