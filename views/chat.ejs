@@ -14,7 +14,6 @@
 <body>
 <h1>WAP General chat</h1><br><br>
 
-<div class="container">
 <div class="form-group">
     <textarea id="chat-body" class="form-control" readonly rows="20px"></textarea>
 </div>
@@ -24,9 +23,8 @@
     Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
 </p>
 <label>Type what you want to say: </label>
-<input type="text" class="form-control" id="mytext" placeholder="type anything">
-<input type="button" class="form-control" value="chat" onclick="clk()">
-</div>
+    <input type="text" class="form-control" id="mytext" placeholder="type anything">
+<input type="button" class="btn" value="chat" onclick="clk()">
 
 
 <div id="UploadBox">
@@ -34,8 +32,8 @@
     <label for="fileBox">Choose A File : </label>
     <input type="file" id="fileBox"><br>
     <label for="nameBox">Name : </label>
-    <input type="text" class="form-control" id="nameBox"><br>
-    <button type="button" class="form-control" id="uploadButton">Upload</button>
+    <input type="text" class="form-control" id="nameBox">
+    <button type="button" class="btn" id="uploadButton">Upload</button>
     <br>
 
 </div>
