@@ -87,9 +87,9 @@
         console.log(data);
         arr.push(first(data));
         if (data.user_id != undefined) {
-            $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + data.msg + '\n');
+            $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + data.msg + '<br>');
         } else {
-            $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + data.msg + '\n');
+            $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + data.msg + '<br>');
         }
     });
     $('#mytext').keydown(function (key) {
