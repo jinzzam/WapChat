@@ -18,8 +18,8 @@ router.post('/', function (req, res, next) {
     var user_pw = req.body.user_pw;
 
     var selectpwsql = 'select password from user where id=?';
-    connection.query(selectpwsql, user_id, function (err, rows, field) {
-        console.log('rows[0] : ', rows); //회원가입-로그인시 rows 값이 제대로 넘어오지 못하고 있음, 새로고침후 로그인시 정상 작동
+    connection.query(selectpwsql, user_id, function (err, rows, fields) {
+        console.log('rows[0] : ', rows);
         if (err) throw err;
         if (rows[0] == null) {
             res.redirect('/no-id');
