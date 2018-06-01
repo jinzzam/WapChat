@@ -134,6 +134,7 @@ io.sockets.on('connection', function (socket) {
         //     place = Stat.size / 524288;
         // }
 
+        //read write append
         fs.open("Temp/" + Name, "a+", function (err, fd) {
             if (err) console.log(err);
             else {
