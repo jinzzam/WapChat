@@ -3,7 +3,7 @@ var connection = require('../public/javascripts/dbconnection');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function(req, res, next) {
     if (req.session.user_id != undefined) {
         res.render('conference',{user_id:req.session.user_id});
     } else {
