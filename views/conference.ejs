@@ -14,13 +14,12 @@
 <body>
 <h1>WAP Conference Chat</h1>
 <form>
-    <div class="form-control" id="chat-body" rows="20px"
-         style="border: 1px solid;width:50%;height: 300px;overflow:scroll;">
-    </div>
+    <div class="form-control" id="chat-body" rows="20px">
+             </div>
     <!--닉네임 사용여부 기능-->
     <p>
         <label>Choose Online_id: <br/></label>
-        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicksql">
+        Using nickname <input type="radio" name="onlineid" id="onlineid_nick" value="usenicknamesql" checked="checked">
         Using name <input type="radio" name="onlineid" id="onlineid_name" value="usenamesql">
     </p>
     <div class="form-group">
@@ -69,8 +68,33 @@
 
     function clk() {
         var message = $('#mytext').val();
-        socket.emit('chatReqC', {msg: message});
+        socket.emit('chatReqC', {
+            msg: message,
+            user_id: '<%= user_id %>',
+            checked_id: $('#onlineid_nick').is(':checked')
+        });
     }
+    //줄바꿈이 제대로 되지 않음
+    socket.on('conferenceRes', function (data) {
+        console.log(data);
+        if (data.user_id != undefined) {
+            $('#chat-body').html($('#chat-body').html() + data.user_id + ':' + data.msg + '\n');
+        } else {
+            $('#chat-body').html($('#chat-body').html() + data.user_name + ':' + data.msg + '\n');
+        }
+    });
+    $('#mytext').keydown(function (key) {
+        var message = $('#mytext').val();
+        if (key.keyCode == 13 && message != "") {
+            socket.emit('chatReqC', {
+                msg: message,
+                user_id: '<%= user_id %>',
+                checked_id: $('#onlineid_nick').is(':checked')
+            });
+            $('#mytext').val(null);
+            $('#mytext').focus();
+        }
+    });
     //클릭하면 데이터 옮기는 함수
     function chkfirst(){
         //Get the checkBox
