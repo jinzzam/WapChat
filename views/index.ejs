@@ -9,32 +9,34 @@
 
 </head>
 <body>
-<div class="jumbotron">
+<div class="container">
 <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-</div>
+
 <% if (user_id != undefined){ %>
-ID is <%= user_id %><br>
+ID는 <%= user_id %>입니다.<br><br>
 <% }else{ %>
 로그인 해주세요.<br><br>
 <% } %>
 <div class="btn-group btn-group">
-    <input type="button" class="btn btn-info btn-lg " id="gochat" name="gochat" value="Let's Chat"
+    <input type="button" class="btn btn-info btn-lg " id="gochat" name="gochat" value="일반 채팅"
            onclick="location.href='/chat'">
-    <input type="button" class="btn btn-info btn-lg " id="goconference" name="conference chat" value="Conference"
+    <input type="button" class="btn btn-info btn-lg " id="goconference" name="conference chat" value="회의 채팅"
            onclick="location.href='/conference-chat'">
     <input type="button" class="btn btn-info btn-lg" id="gomodify" name="gomodify" value="Modify Information"
            onclick="location.href='/modifyInfo'">
     <% if (user_id == undefined){ %>
-    <input type="button" class="btn btn-info btn-lg" id="gojoin" name="gojoin" value="Join"
+    <input type="button" class="btn btn-info btn-lg" id="gojoin" name="gojoin" value="회원 가입"
            onclick="location.href='/join'">
-    <input type="button" class="btn btn-info btn-lg" id="gologin" name="gologin" value="Login"
+    <input type="button" class="btn btn-info btn-lg" id="gologin" name="gologin" value="로그인"
            onclick="location.href='/login'">
     <% }else{ %>
-    <input type="button" class="btn btn-info btn-lg" id="gologin" name="gologin" value="Logout"
+    <input type="button" class="btn btn-info btn-lg" id="gomodify" name="gomodify" value="회원 정보 수정"
+           onclick="location.href='/modify-info'">
+    <input type="button" class="btn btn-info btn-lg" id="gologin" name="gologin" value="로그아웃"
            onclick="location.href='/logout'">
-    <% }
-    %>
+    <% } %>
+</div>
 </div>
 <script src="/js/bootstrap.min.js"></script>
 </body>

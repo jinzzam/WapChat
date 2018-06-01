@@ -11,7 +11,6 @@
 
 </head>
 <body>
-
     <form method="'post" name="modifymembership">
         이름 : <input type="text" id="username" name="username" value='<%=user_name %>' ><br>
         생년월일 : <input type="date" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6"><br>
@@ -22,7 +21,43 @@
         닉네임 입력 : <input type="text" id="user_nick" name="user_nickname" placeholder="변경하고 싶은 닉네임을 입력해주세요"><br>
 
         <input type="button" value="회원정보 수정 완료" onclick="undateinfo()">
+<div class="container" style="max-width:600px;padding:40px 20px;background:#ebeff2">
+    <h1>회원정보수정</h1>
+    <form method="'post" class-"form-horizontal" name="modifymembership">
+    <div class="form-group form-group-lg">
+        <label for="name">이름</label>
+        <input type="text" class="form-control" id="username" name="username" required="" autofocus="" value="">
+    </div>
+    <div class="form-group form-group-lg">
+        <label for="name">생년월일</label>
+        <input type="date" class="form-control" id="birthday" name="birthday" placeholder="YYMMDD 형식으로 입력해주세요" maxlength="6">
+    </div>
+    <div class="form-group form-group-lg">
+        <label for="name">전화번호</label>
+        <input type="text" class="form-control" id="number" name="number" placeholder="'-'을 제외한 번호를 입력해주세요" maxlength="11">
+    </div>
+    <div class="form-group form-group-lg">
+        <label for="name">아이디</label>
+        <input type="text" class="form-control" id="user_id" name="user_id">
+    </div>
+    <div class="form-group form-group-lg">
+        <label for="name">비밀번호</label>
+        <input type="password" class="form-control" id="user_pw" name="user_pw">
+    </div>
+    <div class="form-group form-group-lg">
+        <label for="name">비밀번호 확인</label>
+        <input type="password" class="form-control" id="verify_pw" name="verify_pw">
+    </div>
+    <div class="form-group form-group-lg">
+        <label for="name">닉네임 입력</label>
+        <input type="text" class="form-control" id="user_nick" name="user_nickname" placeholder="변경하고 싶은 닉네임을 입력해주세요">
+    </div>
+
+    <input type="button" class="btn btn-success" value="회원정보 수정 완료" onclick="undateinfo()">
+
+
     </form>
+</div>
     <script>
         var updatename = "update user set values(name=?) where id=?";
         var updatephone ="update user set values(phonenumber=?) where id=?";

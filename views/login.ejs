@@ -12,17 +12,21 @@
 
 
 <!-- 로그인폼 -->
-<form action="/login" class="form-group" method="post">
-    <div class="form-group form-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">ID</span>
-    <input name="user_id" type="text" class="form-control" placeholder="id를 입력하세요" aria-describedby="sizing-addon1"/><br/>
+<div class="container" style="max-width:600px;padding:40px 20px;>
+<form action="/login" class="form-signin" method="post">
+    <h2 class="form-signin-heading">Please Login</h2>
+    <div class="form-group">
+        <label for="name">아이디</label>
+    <input name="user_id" type="text" class="form-control" placeholder="id를 입력하세요" required="" autofocus=""/>
     </div>
-    <div class="form-group form-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">PW</span>
-    <input name="user_pw" type="password" class="form-control" placeholder="pw를 입력하세요" aria-describedby="sizing-addon1"/><br/>
-    <input value="로그인" type="submit" class="form-control btn btn-primary"/>
+    <div class="form-group">
+        <label for="name">비밀번호</label>
+    <input name="user_pw" type="password" class="form-control" placeholder="pw를 입력하세요" required=""/>
     </div>
+    <input value="로그인" type="submit" class="btn btn-lg btn-success btn-block"/>
+
 </form>
+</div>
 <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
