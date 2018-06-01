@@ -56,9 +56,9 @@
 
     var arr = [];
     var moveArr=[];
-    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst()">';
-    var deleteCheck= '<input type="checkbox" id="deleteBox" onclick="chkdelete()">';
-    var moveToTextFile = '<input type="checkbox" id="textCheckbox" onclick="">';
+    var moveToConferenceTalbe = '<input type="checkbox" id="checkBox" onclick="chkfirst()" value="1">';
+    var candidateCheck= '<input type="checkbox" id="deleteBox" onclick="chkdelete()">';
+
 
     function first(data) {
         return '<b>' + data + '</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -74,15 +74,20 @@
     //클릭하면 데이터 옮기는 함수
     function chkfirst(){
         //Get the checkBox
-        var conferenceContent=arr[arr.length-1];
+        var conferenceContent=arr[arr.length-1];//수정해야해 배열2개( 1: 문자들, 2: 문자들과 동일한 체크박스 순서)-> 출력할 때
         var CheckBox=document.getElementById("checkBox");
         //If the checkbox is checked, display the output text
         if(CheckBox.checked==true)
             //conference-table에 데이터 옮기기
             socket.emit('conferenceChat',{cmsg:conferenceContent});
     }
+
+    // function saveToArray{
+    //
+    // }
+
     function chkdelete(){
-    var conferenceMessage=moveArr[moveArr.length-1];
+    var conferenceMessage=moveArr[moveArr.length-1];//수정해야해
     var deleteBox=document.getElementById("deleteBox");
     var linedMessage=conferenceMessage.fontcolor("red");
     var makeEmpty=conferenceMessage.replace(conferenceMessage,linedMessage);
@@ -93,14 +98,18 @@
     socket.on('chatRes', function (data) {
         console.log(data);
         arr.push(first(data));
+        // $('input:checkbox[name=candidateCheck]').forEach(function(){
+        //     checkArr.push($(this).);
+        // });//checkbox 배열 삽입
         $('#chat-body').html($('#chat-body').html() + arr[arr.length-1]+moveToConferenceTalbe + '<br>');
     });
 
     socket.on('conferenceRes',function(data){
         console.log(data);
         moveArr.push(data);
-        $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+deleteCheck+'<br>');
+        $('#conference-table').html($('#conference-table').html()+moveArr[moveArr.length-1]+candidateCheck+'<br>');
     });
+
 
     $('#mytext').keydown(function (key) {
         var message = $('#mytext').val();
