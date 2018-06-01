@@ -5,13 +5,12 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
     if (req.session.user_id != undefined) {
-        res.render('conference');
+        res.render('conference',{user_id:req.session.user_id});
     } else {
         res.redirect('/login');
     }
 });
-
 router.post('/', function (req, res) {
     res.render('conference');
-})
+});
 module.exports = router;

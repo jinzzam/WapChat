@@ -23,6 +23,8 @@ ID는 <%= user_id %>입니다.<br><br>
            onclick="location.href='/chat'">
     <input type="button" class="btn btn-info btn-lg " id="goconference" name="conference chat" value="회의 채팅"
            onclick="location.href='/conference-chat'">
+    <input type="button" class="btn btn-info btn-lg" id="gomodify" name="gomodify" value="Modify Information"
+           onclick="location.href='/modifyInfo'">
     <% if (user_id == undefined){ %>
     <input type="button" class="btn btn-info btn-lg" id="gojoin" name="gojoin" value="회원 가입"
            onclick="location.href='/join'">

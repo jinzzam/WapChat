@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
         res.redirect('/login');
     }
 });
-
 router.post('/', function (req, res) {
     res.render('chat');
 });
