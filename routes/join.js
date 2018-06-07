@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
     var verifypw = req.body.verify_pw;
     var nickname=req.body.user_nickname;
 
-    if (password == verifypw) { //찾는 id의 db존재 여부에 따라 join.ejs의 중복체크 버튼에 사용가능여부 전달하고싶음.
+    if (password == verifypw) {
         //회원가입 성공
         var insertsql = 'insert into user (name,birthday,number,id,password,nickname) values ("' + name + '","' + birthday + '","' + number + '","' + id + '","' + password + '","' + nickname + '")';
         connection.query(insertsql, function (err, rows, fields) {
